@@ -10,8 +10,11 @@
                    "font: normal 11px Droid Sans Mono, Inconsolata, Consolas, monospace; letter-spacing: -1px; max-height: 300px; overflow: hidden; overflow-y: auto" +
                    "}\n" +
                    "#microdata-container li { list-style: none; padding: 0; margin: 0; cursor: pointer; }\n" +
+                   "#microdata-container>li:before { content: \"\21D2\"; }\n" +
+                   "#microdata-container>li.expanded:before { content: \"\21D3\"; }\n" +
+                   "#microdata-container>li.expanded ul { display: block; }\n" +
                    "#microdata-container li:hover { background: #ff9 }\n" +
-                   "#microdata-container ul { padding: 0; margin-left: 10px; color: #999 }\n" +
+                   "#microdata-container ul { display: none; padding: 0; margin-left: 10px; color: #999 }\n" +
                    ".microdata-highlighted { outline: 5px dashed red !important; background: yellow !important };";
     
     /**
@@ -44,7 +47,8 @@
         t.hover(
             function() { $(element).addClass('microdata-highlighted'); },
             function() { $(element).removeClass('microdata-highlighted'); }
-        );
+        ).delegate('*', 'click', function() { t.toggleClass('expanded'); return false; });
+        
     };
     
     /**
