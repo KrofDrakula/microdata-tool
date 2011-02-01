@@ -5,7 +5,7 @@
         // TODO: need to clean this up or externalize it
         cssBlock = "#microdata-container { " +
                    "position: absolute; bottom: 10px; left: 10px; background: white; padding: 5px; color: #444; " +
-                   "-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; " +
+                   "-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; border: 1px solid black; " +
                    "-webkit-box-shadow: 0 0 5px black; -moz-box-shadow: 0 0 5px black; box-shadow: 0 0 5px; " +
                    "font: normal 11px Droid Sans Mono, Inconsolata, Consolas, monospace; letter-spacing: -1px; max-height: 300px; " +
                    "}\n" +
@@ -89,7 +89,7 @@
     
     // this function fires on DOMready
     var init = function() {
-        $('<style/>').html(cssBlock).attr('type', 'text/css').appendTo('head');
+        $('<style type="text/css">' + cssBlock + '</style>').appendTo('head');
         widget = $('<ul id="microdata-container"/>').appendTo('body');
         
         updateList();
