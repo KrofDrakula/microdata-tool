@@ -4,12 +4,13 @@
         // CSS styles injected into head
         // TODO: need to clean this up or externalize it
         cssBlock = "#microdata-container { " +
-                   "position: absolute; bottom: 10px; left: 10px; background: white; padding: 5px; color: #444; " +
+                   "position: fixed; bottom: 10px; left: 10px; background: white; padding: 5px; color: #444; " +
                    "-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; border: 1px solid black; " +
                    "-webkit-box-shadow: 0 0 5px black; -moz-box-shadow: 0 0 5px black; box-shadow: 0 0 5px; " +
-                   "font: normal 11px Droid Sans Mono, Inconsolata, Consolas, monospace; letter-spacing: -1px; max-height: 300px; " +
+                   "font: normal 11px Droid Sans Mono, Inconsolata, Consolas, monospace; letter-spacing: -1px; max-height: 300px; overflow: hidden; overflow-y: auto" +
                    "}\n" +
-                   "#microdata-container li { list-style: none; padding: 0; margin: 0; }\n" +
+                   "#microdata-container li { list-style: none; padding: 0; margin: 0; cursor: pointer; }\n" +
+                   "#microdata-container li:hover { background: #ff9 }\n" +
                    "#microdata-container ul { padding: 0; margin-left: 10px; color: #999 }\n" +
                    ".microdata-highlighted { outline: 5px dashed red !important; background: yellow !important };";
     
@@ -33,7 +34,8 @@
      * handler to highlight the relevant element
      */
     var addObject = function(element, mdata) {
-        var t = $('<li>' + $(element).attr('itemtype') + '</li>').appendTo(widget),
+        var type = $(element).attr('itemtype'),
+            t = $('<li title="' + type + '">' + (isUrl(type)? '<a href="' + type + '">' + type.replace(/^.*\//, '') + '</a>': type) + '</li>').appendTo(widget),
             u = $('<ul/>').appendTo(t);
         
         for(var i = 0; i < mdata.length; i++) {
@@ -45,6 +47,14 @@
         );
     };
     
+    /**
+     * Test a string for valid URL
+     * @return bool
+     */
+    var isUrl = function(str) {
+        return /^https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?$/.test(str);
+    };
+    
     
     /**
      * Updates the list of microdata objects in the widget
@@ -53,6 +63,11 @@
         
         clearObjects();
         refreshList();
+        
+        if(items.length == 0) {
+            $('<li>No microdata objects detected!</li>').appendTo(widget);
+            return;
+        }
         
         items.each(function() {
             var $t = $(this), propElements = $t.find('[itemprop]'), props = [];
