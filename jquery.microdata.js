@@ -19,7 +19,7 @@
      * Updates the list of microdata elements on the page
      */
     var refreshList = function() {
-        items = $('[itemscope]');
+        items = $('[itemscope]', $.microdata.defaults.scope);
     };
     
     /**
@@ -35,17 +35,22 @@
      * handler to highlight the relevant element
      */
     var addObject = function(element, mdata) {
-        var type = $(element).attr('itemtype'),
-            t = $('<li title="' + type + '">' + (isUrl(type)? '<a href="' + type + '">' + type.replace(/^.*\//, '') + '</a>': type) + '</li>').appendTo(widget),
+        var type = mdata.type,
+            t = $('<li title="' + type + '">' + (isUrl(type)? '<a href="' + type + '">' + type.replace(/^.*\//, '') + '</a>': "[no vocabulary]") + '</li>').appendTo(widget),
             u = $('<ul/>').appendTo(t);
         
-        for(var i = 0; i < mdata.length; i++) {
-            u.append('<li>' + mdata[i].property + ' = ' + mdata[i].value + '</li>');
+        if(mdata.properties.length > 0) {
+            for(var i = 0; i < mdata.properties.length; i++) {
+                u.append('<li>' + mdata.properties[i].name + ' = ' + mdata.properties[i].value + '</li>');
+            }
+        } else {
+            u.append('[no properties]');
         }
+        
         t.hover(
             function() { $(element).addClass('microdata-highlighted'); },
             function() { $(element).removeClass('microdata-highlighted'); }
-        ).delegate('*', 'click', function() { t.toggleClass('expanded'); return false; });
+        ).click(function() { t.toggleClass('expanded'); return false; });
         
     };
     
@@ -71,36 +76,7 @@
             return;
         }
         
-        items.each(function() {
-            var $t = $(this), propElements = $t.find('[itemprop]'), props = [];
-            propElements.each(function() {
-                var propname = $(this).attr('itemprop').toLowerCase().split(' '), $p = $(this);
-                
-                for (var i = 0; i < propname.length; i++) {
-                    var v = $p.text();
-
-                    // special cases for 'url' itemprop; takes attribute values
-                    // for certain tags
-                    if (propname[i] == 'url') {
-                        if ($p.is('a,area,link'))
-                            v = $p.attr('href');
-                        else if ($p.is('audio,embed,iframe,img,source,video'))
-                            v = $p.attr('src');
-                        else if ($p.is('object'))
-                            v = $p.attr('data');
-                    }
-                    
-                    if ($p.is('time')) v = $p.attr('datetime') || $p.text();
-                    
-                    props.push({
-                        property : propname[i],
-                        value : v
-                    });
-                }
-            });
-            
-            addObject(this, props);
-        });
+        items.each(function() { addObject(this, parseElement(this)); });
     };
     
     
@@ -112,12 +88,45 @@
         updateList();
     };
     
+    var parseElement = function(el) {
+        if(!el.jquery) el = $(el);
+        if(!el.is('[itemscope]')) return null;
+        
+        var propElements = el.find('[itemprop]'), props = [];
+        propElements.each(function() {
+            var $p = $(this), propname = $p.attr('itemprop').toLowerCase().split(' ');
+            
+            for (var i = 0; i < propname.length; i++) {
+                var v = $p.text();
+
+                if ($p.is('a,area,link'))
+                    v = $p.attr('href');
+                else if ($p.is('audio,embed,iframe,img,source,video'))
+                    v = $p.attr('src');
+                else if ($p.is('object'))
+                    v = $p.attr('data');
+                else if ($p.is('time')) v = $p.attr('datetime') || $p.text();
+                
+                props.push({
+                    name : propname[i],
+                    value : v
+                });
+            }
+        });
+        
+        return { type: el.attr('itemtype') || null, properties: props };
+    };
+    
     
     // expose functions for use by outside scripts via plugin
     $.extend({
         microdata: {
             getItems: function() { return items; },
-            updateList: updateList
+            updateList: updateList,
+            parseElement: parseElement,
+            defaults: {
+                scope: 'body'
+            }
         }
     });
     
