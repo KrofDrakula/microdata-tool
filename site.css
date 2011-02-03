@@ -63,4 +63,4 @@ header p { font-style: italic; margin: 0 }
 
 p { margin-bottom: 1em; }
 
-.instructions { position: fixed; padding-left: 130px; max-width: 200px; height: 107px; left: 80px; bottom: 50px; background: url(images/arrow.png) 0 50% no-repeat transparent; font-size: 85%; }
+.instructions { position: fixed; padding-left: 130px; max-width: 400px; height: 107px; left: 80px; bottom: 50px; background: url(images/arrow.png) 0 50% no-repeat transparent; font-size: 85%; line-height: 1.4em;  }
