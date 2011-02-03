@@ -231,29 +231,25 @@
             }
         });
         
-        return { type: el.attr('itemtype') || "", properties: props };
+        return { type: el.attr('itemtype') || null, properties: props };
     };
     
     
     // expose functions for use by outside scripts via plugin
-    $.extend({
-        microdata: {
-            getItems: function() { return items; },
-            updateList: updateList,
-            parseElement: parseElement,
-            defaults: {
-                scope: 'body'
-            }
+    $.microdata = {
+        getItems: function() { return items; },
+        updateList: updateList,
+        parseElement: parseElement,
+        defaults: {
+            scope: 'body'
         }
-    });
+    };
     
-    $.fn.extend({
-        hasAttr: function(name) {
-            return typeof this.attr(name) !== 'undefined' || this.attr(name) !== false;
-        }
-    });
+    $.fn.hasAttr = function(name) {
+        return typeof this.attr(name) !== 'undefined' || this.attr(name) !== false;
+    };
     
     
     // init the drop-in script
-    $(function() { init(); });
+    $(init);
 })(jQuery);
