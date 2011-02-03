@@ -9,11 +9,12 @@
                    "-webkit-box-shadow: 0 0 5px black; -moz-box-shadow: 0 0 5px black; box-shadow: 0 0 5px; " +
                    "font: normal 11px Droid Sans Mono, Consolas, Inconsolata, monospace; letter-spacing: -1px; " +
                    "}\n" +
+                   "#microdata-container a { color: #009 !important }\n" +
                    "#microdata-container li { list-style: none; padding: 0; margin: 0; cursor: pointer; }\n" +
                    "#microdata-container>li.expanded ul { display: block; }\n" +
                    "#microdata-container li:hover { background: #ff9 }\n" +
                    "#microdata-container ul { display: none; padding: 0; margin-left: 10px; color: #999 }\n" +
-                   ".microdata-highlighted { outline: 5px dashed red !important; background: yellow !important }\n" +
+                   ".microdata-highlighted { outline: 2px dashed red !important; background: rgba(255,0,0,0.3) !important; color: black !important }\n" +
                    "#microdata-container .invalid { color: red !important }",
                    
         
