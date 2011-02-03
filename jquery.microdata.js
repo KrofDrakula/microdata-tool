@@ -231,7 +231,7 @@
             }
         });
         
-        return { type: el.attr('itemtype') || "", properties: props };
+        return { type: el.attr('itemtype') || null, properties: props };
     };
     
     
