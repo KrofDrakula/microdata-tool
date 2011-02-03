@@ -14,7 +14,7 @@
                    "#microdata-container>li.expanded ul { display: block; }\n" +
                    "#microdata-container li:hover { background: #ff9 }\n" +
                    "#microdata-container ul { display: none; padding: 0; margin-left: 10px; color: #999 }\n" +
-                   ".microdata-highlighted { outline: 2px dashed red !important; }\n" +
+                   ".microdata-highlighted { outline: 2px dashed red !important; background: rgba(255,0,0,0.3) !important; color: black !important }\n" +
                    "#microdata-container .invalid { color: red !important }",
                    
         

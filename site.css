@@ -53,8 +53,9 @@ a { color: #6f6; }
 em { font-style: italic; }
 strong { font-weight: bold; }
 a.go { font-size: 120%; font-weight: bold; }
-body { font: normal 120%/1.8em serif; text-rendering:optimizeLegibility; color: white; background: url(images/bg-gradient.jpg) 30% 0 no-repeat #000c2d }
-article { background: #224588; background: rgba(255,255,255,0.2); width: 540px; margin: 0 auto; padding: 20px; }
+html { background: url(images/bg-gradient.jpg) 20% 0 no-repeat #000c2d }
+body { font: normal 120%/1.8em Garamond, serif; text-rendering:optimizeLegibility; color: white; }
+article { background: #224588; background: rgba(255,255,255,0.2); width: 540px; margin: 0 auto; padding: 20px; padding-bottom: 30em; }
 
 footer { text-align: center; font-size: 75% }
 header { text-align: center; padding: 1em; background: #4467aa; background: rgba(255,255,255,0.2); margin: 1em 0; }
@@ -63,4 +64,4 @@ header p { font-style: italic; margin: 0 }
 
 p { margin-bottom: 1em; }
 
-.instructions { position: fixed; padding-left: 130px; max-width: 400px; height: 107px; left: 80px; bottom: 50px; background: url(images/arrow.png) 0 50% no-repeat transparent; font-size: 85%; line-height: 1.4em;  }
+.instructions { padding: 40px; padding-left: 140px; background: url(images/arrow.png) 10px 50% no-repeat rgba(255,255,255,0.2); font-size: 85%; line-height: 1.4em; border: 1px solid gray; -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.6); -moz-box-shadow: 0 0 10px rgba(0,0,0,0.6); box-shadow: 0 0 10px rgba(0,0,0,0.6); }
