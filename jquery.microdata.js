@@ -70,7 +70,7 @@
      */
     var addObject = function(element, mdata) {
         var type = mdata.type,
-            t = $('<li title="' + type + '">' + (isUrl(type)? '<a href="' + type + '">' + type.replace(/^.*\//, '') + '</a>': "[no vocabulary]") + '</li>').appendTo(widget),
+            t = $('<li title="' + type + '">' + (validators.url(type)? '<a href="' + type + '">' + type.replace(/^.*\//, '') + '</a>': "[no vocabulary]") + '</li>').appendTo(widget),
             u = $('<ul/>').appendTo(t), rules = [], required = [], rule, prop, validationExists = false;
         
         if(mdata.properties.length > 0) {
@@ -107,14 +107,6 @@
             function() { $(element).removeClass('microdata-highlighted'); }
         ).click(function() { t.toggleClass('expanded'); return false; });
         
-    };
-    
-    /**
-     * Test a string for valid URL
-     * @return bool
-     */
-    var isUrl = function(str) {
-        return /^https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?$/.test(str);
     };
     
     
