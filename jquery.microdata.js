@@ -19,16 +19,27 @@
         
         // validators for values in microdata
         validators = {
-            text: function(value) { return true; },
-            url: function(value) { return /^https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?$/.test(value); },
-            int: function(value) { return /^\d+/.test(value); },
+            text:      function(value, el) { return $.trim(value).length > 0; },
+            
+            url:       function(value, el) { return /^https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?$/.test(value); },
+            
+            int:       function(value, el) { return /^\d+$/.test(value); },
+            
+            float:     function(value, el) { return /^\d+([.,]\d*)?$/.test(value); },
+            
             // TODO: need a proper datetime validator
-            datetime: function(value) { return /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2})?)?$/.test(value); },
+            datetime:  function(value, el) { return /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2})?)?$/.test(value); },
+            
             // TODO: check the duration per http://en.wikipedia.org/wiki/ISO_8601#Durations
-            duration: function(value) { return /^P(([0-9.,]+[YMD])*(T[0-9.,]+[HMS])*|[0-9.,]W)$/.test(value); },
-            // TODO: complex types require other nested entities
-            complex: function(value) { return true; },
-            any: function(value) { return true; }
+            duration:  function(value, el) { return /^P(([0-9.,]+[YMD])*(T[0-9.,]+[HMS])*|[0-9.,]W)$/.test(value); },
+            
+            // TODO: complex types require other nested entities or special treatment
+            complex:   function(value, el) { return true; },
+            
+            // TODO: check three-letter ISO code for currency: http://www.iso.org/iso/support/faqs/faqs_widely_used_standards/widely_used_standards_other/currency_codes.htm
+            currency:  function(value, el) { return /^[a-zA-Z]{3}$/.test(value); },
+            
+            any: function(value, el) { return true; }
         },
         
         
@@ -36,16 +47,70 @@
         validationRules = {
             "http://data-vocabulary.org/Event" :
                 [
-                     { name: "summary", required: true, type: "text", validator: validators.text },
-                     { name: "url", required: false, type: "url", validator: validators.url },
-                     { name: "location", required: false, type: "complex", validator: validators.complex }, // optionally represented by data-vocabulary.org/Organization or data-vocabulary.org/Address
-                     { name: "description", required: false, type: "text", validator: validators.text },
-                     { name: "startdate", required: true, type: "datetime", validator: validators.datetime },
-                     { name: "enddate", required: false, type: "datetime", validator: validators.datetime },
-                     { name: "duration", required: false, type: "duration", validator: validators.duration },
-                     { name: "eventtype", required: false, type: "text", validator: validators.text },
-                     { name: "geo", required: false, type: "complex", validator: validators.complex }, // represented by itemscope with two properties: latitude and longitude
-                     { name: "photo", required: false, type: "url", validator: validators.url } 
+                     { name: "summary",     required: true,  type: "text",     validator: validators.text     },
+                     { name: "url",         required: false, type: "url",      validator: validators.url      },
+                     { name: "location",    required: false, type: "complex",  validator: validators.complex  }, // optionally represented by data-vocabulary.org/Organization or data-vocabulary.org/Address
+                     { name: "description", required: false, type: "text",     validator: validators.text     },
+                     { name: "startdate",   required: true,  type: "datetime", validator: validators.datetime },
+                     { name: "enddate",     required: false, type: "datetime", validator: validators.datetime },
+                     { name: "duration",    required: false, type: "duration", validator: validators.duration },
+                     { name: "eventtype",   required: false, type: "text",     validator: validators.text     },
+                     { name: "geo",         required: false, type: "complex",  validator: validators.complex  }, // represented by itemscope with two properties: latitude and longitude
+                     { name: "photo",       required: false, type: "url",      validator: validators.url      } 
+                ],
+                
+            "http://data-vocabulary.org/Person" :
+                [
+                     { name: "name",         required: false, type: "text",    validator: validators.text    },
+                     { name: "fn",           required: false, type: "text",    validator: validators.text    }, // alias for "name"
+                     { name: "nickname",     required: false, type: "text",    validator: validators.text    },
+                     { name: "photo",        required: false, type: "url",     validator: validators.url     },
+                     { name: "title",        required: false, type: "text",    validator: validators.text    },
+                     { name: "role",         required: false, type: "text",    validator: validators.text    },
+                     { name: "url",          required: false, type: "url",     validator: validators.url     },
+                     { name: "affiliation",  required: false, type: "text",    validator: validators.text    },
+                     { name: "org",          required: false, type: "text",    validator: validators.text    }, // alias for "affiliation"
+                     { name: "address",      required: false, type: "complex", validator: validators.complex }, // can have subproperties street-address, city, region, postal-code, country-name
+                     { name: "adr",          required: false, type: "complex", validator: validators.complex }, // alias for "address"
+                     { name: "friend",       required: false, type: "url",     validator: validators.url     },
+                     { name: "contact",      required: false, type: "url",     validator: validators.url     },
+                     { name: "acquaintance", required: false, type: "url",     validator: validators.url     }
+                     // NOTE: to define "friend", "contact" or "acquaintance", you can also use XFN rel="..."
+                ],
+            
+            "http://data-vocabulary.org/Organization" :
+                [
+                     { name: "name",    required: false, type: "text",    validator: validators.text    },
+                     { name: "fn",      required: false, type: "text",    validator: validators.text    }, // alias for "name"
+                     { name: "org",     required: false, type: "text",    validator: validators.text    }, // alias for "name"
+                     { name: "url",     required: false, type: "url",     validator: validators.url     },
+                     { name: "address", required: false, type: "complex", validator: validators.complex },
+                     { name: "adr",     required: false, type: "complex", validator: validators.complex }, // alias for "address"
+                     { name: "tel",     required: false, type: "text",    validator: validators.text    },
+                     { name: "geo",     required: false, type: "complex", validator: validators.complex }
+                ],
+                
+            "http://data-vocabulary.org/Offer" :
+                [
+                     { name: "price",           required: false, type: "float",    validator: validators.float    },
+                     { name: "currency",        required: false, type: "text",     validator: validators.currency },
+                     { name: "pricevaliduntil", required: false, type: "datetime", validator: validators.datetime },
+                     { name: "seller",          required: false, type: "complex",  validator: validators.complex  }, // can contain a Person or Organization
+                     {
+                         name: "condition",     required: false, type: "complex",
+                         validator: function(value, el) {
+                             return $(el).hasAttr('content') && $.inArray($(el).attr('content').toLowerCase(), ["new", "used", "refurbished"]);
+                         }
+                     }, 
+                     {
+                         name: "availability",  required: false, type: "complex",
+                         validator: function(value, el) { 
+                             return $(el).hasAttr('content') && $.inArray($(el).attr('content').toLowerCase(), ["out_of_stock", "in_stock", "instore_only", "preorder"]);
+                         }
+                     },
+                     { name: "offerurl",        required: false, type: "url",      validator: validators.url      }, // points to a product web page that includes the offer
+                     { name: "identifier",      required: false, type: "text",     validator: validators.text     }, // recognizes ASIN, ISBN, MPN, UPC, SKU; suggests including product prand and at least one of the identifiers
+                     { name: "itemoffered",     required: false, type: "complex",  validator: validators.complex  }  // can contain free text, a Product or other item types
                 ]
         };
     
@@ -82,6 +147,7 @@
             for(var i = 0; i < mdata.properties.length; i++) {
                 prop = $('<li>' + mdata.properties[i].name + ' = ' + mdata.properties[i].value + '</li>').appendTo(u);
                 
+                // if validation is present, validate the properties
                 if(validationExists) {
                     rule = $.grep(rules, function(item) { return item.name == mdata.properties[i].name.toLowerCase(); });
                     
@@ -93,6 +159,8 @@
                     }
                 }
             }
+            
+            // any required properties not defined are appended to the list
             if(required.length > 0) {
                 for(var i = 0; i < required.length; i++) {
                     $('<li class="invalid">missing property: ' + required[i].name + '</li>').appendTo(u);
@@ -119,7 +187,7 @@
         refreshList();
         
         if(items.length == 0) {
-            $('<li>No microdata objects detected!</li>').appendTo(widget);
+            $('<li class="invalid">No microdata objects detected!</li>').appendTo(widget);
             return;
         }
         
@@ -137,9 +205,8 @@
     
     var parseElement = function(el) {
         if(!el.jquery) el = $(el);
-        var itemscope = el.attr('itemscope');
         // if the element in question isn't an itemscope, return null
-        if(typeof itemscope == 'undefined' || itemscope === false) return null;
+        if(!el.hasAttr('itemscope')) return null;
         
         var propElements = el.find('[itemprop]'), props = [];
         propElements.each(function() {
@@ -176,6 +243,12 @@
             defaults: {
                 scope: 'body'
             }
+        }
+    });
+    
+    $.fn.extend({
+        hasAttr: function(name) {
+            return typeof this.attr(name) !== 'undefined' || this.attr(name) !== false;
         }
     });
     
