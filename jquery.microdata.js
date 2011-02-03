@@ -7,7 +7,7 @@
                    "position: fixed; bottom: 10px; left: 10px; background: white; padding: 5px; color: #444; " +
                    "-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; border: 1px solid black; " +
                    "-webkit-box-shadow: 0 0 5px black; -moz-box-shadow: 0 0 5px black; box-shadow: 0 0 5px; " +
-                   "font: normal 11px Droid Sans Mono, Inconsolata, Consolas, monospace; letter-spacing: -1px; max-height: 300px; overflow: hidden; overflow-y: auto" +
+                   "font: normal 11px Droid Sans Mono, Inconsolata, Consolas, monospace; letter-spacing: -1px; " +
                    "}\n" +
                    "#microdata-container li { list-style: none; padding: 0; margin: 0; cursor: pointer; }\n" +
                    "#microdata-container>li.expanded ul { display: block; }\n" +
