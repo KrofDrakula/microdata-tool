@@ -1,0 +1,66 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+
+a { color: #6f6; }
+em { font-style: italic; }
+strong { font-weight: bold; }
+a.go { font-size: 120%; font-weight: bold; }
+body { font: normal 120%/1.8em serif; text-rendering:optimizeLegibility; color: white; background: url(images/bg-gradient.jpg) 30% 0 no-repeat #000c2d }
+article { background: #224588; background: rgba(255,255,255,0.2); width: 540px; margin: 0 auto; padding: 20px; }
+
+footer { text-align: center; font-size: 75% }
+header { text-align: center; padding: 1em; background: #4467aa; background: rgba(255,255,255,0.2); margin: 1em 0; }
+h1 { font: normal 300% "ChunkFive Roman", ChunkFive, "Arial Black", sans-serif; text-shadow: 0 0 5px black; letter-spacing: 1px }
+header p { font-style: italic; margin: 0 }
+
+p { margin-bottom: 1em; }
+
+.instructions { position: fixed; padding-left: 130px; max-width: 200px; height: 107px; left: 80px; bottom: 50px; background: url(images/arrow.png) 0 50% no-repeat transparent; font-size: 85%; }

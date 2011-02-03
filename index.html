@@ -1,1 +1,54 @@
-Microdata tool
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="site.css"/>
+        <script src="modernizr-1.6.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+        <script src="jquery.microdata.js"></script>
+        <script>
+          $(function() {
+              $('<div class="arrow"/>').appendTo('body');
+          });
+        </script>
+    </head>
+    <body>
+        <article>
+            <footer>
+                <p itemscope itemtype="http://data-vocabulary.org/Person">
+                    A little development and optimization tool brought to you by <a href="http://github.com/KrofDrakula"><span itemprop="name">Klemen Slavič</span></a>.
+                </p>
+            </footer>
+            <header>
+                <h1>Microdata Tool</h1>
+                <p>A drop-in script for browsing and debugging <abbr>HTML5</abbr> microdata.</p>
+            </header>
+            <p>
+                So, you're implementing <a href="http://html5doctor.com/microdata/">HTML5 microdata</a> to
+                improve your site's findability, but find it annoying to use
+                <a href="http://www.google.com/webmasters/tools/richsnippets?url=//diveintohtml5.org/examples/review-plus-microdata.html">Google's Webmaster Tools</a>
+                to verify your results, having to republish your site for each and every change?
+            </p>
+            <p>
+                Been there. That's why I've built a little jQuery drop-in script that you can include
+                on your page and have a handy browser/validator handy, even <em>without Internet connectivity</em>
+                or even a <em>web server</em>.
+            </p>
+            <p>
+                See that arrow down in the left hand corner? Take a look.
+            </p>
+            <p>
+                Want to start using it? <a href="https://github.com/KrofDrakula/microdata-tool" class="go">Go grab the code!</a>
+            </p>
+            <p>
+                <em>Yes, I know this page is fugly. <a href="https://github.com/KrofDrakula/microdata-tool/tree/gh-pages">Care to contribute</a>?</em>
+            </p>
+        </article>
+        <div class="instructions">
+            <p>
+                Wanna try it out? Hover over each of the items on the list to highlight the
+                relevant HTML elements in the document and click to see each object's properties.
+            </p>
+        </div>
+    </body>
+</html>
