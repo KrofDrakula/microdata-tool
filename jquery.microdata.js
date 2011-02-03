@@ -90,7 +90,9 @@
     
     var parseElement = function(el) {
         if(!el.jquery) el = $(el);
-        if(!el.is('[itemscope]')) return null;
+        var itemscope = el.attr('itemscope');
+        // if the element in question isn't an itemscope, return null
+        if(typeof itemscope == 'undefined' || itemscope === false) return null;
         
         var propElements = el.find('[itemprop]'), props = [];
         propElements.each(function() {
@@ -114,7 +116,7 @@
             }
         });
         
-        return { type: el.attr('itemtype') || null, properties: props };
+        return { type: el.attr('itemtype') || "", properties: props };
     };
     
     
