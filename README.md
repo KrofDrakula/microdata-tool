@@ -1,5 +1,7 @@
 # HTML5 microdata testing tool #
 
+To see this tool in action, visit [http://krofdrakula.github.com/microdata-tool](http://krofdrakula.github.com/microdata-tool).
+
 This tool was written to aid in debugging and browsing HTML5 microdata.
 
 To use this tool, simply include the script anywere after the inclusion
