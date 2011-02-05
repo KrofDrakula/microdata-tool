@@ -1,3 +1,4 @@
+/*globals jQuery */
 (function($) {    
     var items = [], widget,
     
@@ -22,23 +23,23 @@
         validators = {
             text:      function(value, el) { return $.trim(value).length > 0; },
             
-            url:       function(value, el) { return /^https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?$/.test(value); },
+            url:       function(value, el) { return (/^https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:\/~\+#]*[\w\-\@?^=%&amp;\/~\+#])?$/).test(value); },
             
-            int:       function(value, el) { return /^\d+$/.test(value); },
+            int:       function(value, el) { return (/^\d+$/).test(value); },
             
-            float:     function(value, el) { return /^\d+([.,]\d*)?$/.test(value); },
+            float:     function(value, el) { return (/^\d+([.,]\d*)?$/).test(value); },
             
             // TODO: need a proper datetime validator
-            datetime:  function(value, el) { return /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2})?)?$/.test(value); },
+            datetime:  function(value, el) { return (/^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2})?)?$/).test(value); },
             
             // TODO: check the duration per http://en.wikipedia.org/wiki/ISO_8601#Durations
-            duration:  function(value, el) { return /^P(([0-9.,]+[YMD])*(T[0-9.,]+[HMS])*|[0-9.,]W)$/.test(value); },
+            duration:  function(value, el) { return (/^P(([0-9.,]+[YMD])*(T[0-9.,]+[HMS])*|[0-9.,]W)$/).test(value); },
             
             // TODO: complex types require other nested entities or special treatment
             complex:   function(value, el) { return true; },
             
             // TODO: check three-letter ISO code for currency: http://www.iso.org/iso/support/faqs/faqs_widely_used_standards/widely_used_standards_other/currency_codes.htm
-            currency:  function(value, el) { return /^[a-zA-Z]{3}$/.test(value); },
+            currency:  function(value, el) { return (/^[a-zA-Z]{3}$/).test(value); },
             
             any: function(value, el) { return true; }
         },
@@ -115,6 +116,92 @@
                 ]
         };
     
+    
+    /**
+     * Takes the result of parseElement and attaches the "valid" and "missing" properties,
+     * then returns the augmented object
+     */
+    var validateData = function(mdata) {
+        var i, rules, required, rule;
+        
+        if(!validationRules.hasOwnProperty(mdata.type)) {
+            for(i = 0; i < mdata.properties.length; i++) {
+                mdata.properties[i].valid = true;
+            }
+            mdata.valid = true;
+            mdata.missing = [];
+            return mdata;
+        }
+        
+        // check type validation
+        mdata.missing = [];
+        mdata.valid = true;
+        
+        rules = validationRules[mdata.type];
+        required = $.grep(rules, function(item) { return item.required; });
+        
+        for(i = 0; i < mdata.properties.length; i++) {
+            rule = $.grep(rules, function(item) { return item.name === mdata.properties[i].name.toLowerCase(); });
+            
+            // pop the field from the required list
+            required = $.grep(required, function(item) { return item.name === mdata.properties[i].name.toLowerCase(); }, true);
+            
+            if(rule.length > 0 && !rule[0].validator(mdata.properties[i].value)) {
+                mdata.properties[i].valid = false;
+                mdata.valid = false;
+            } else {
+                mdata.properties[i].valid = true;
+            }
+        }
+        
+        // any required properties not defined are appended to the list
+        if(required.length > 0) {
+            for(i = 0; i < required.length; i++) {
+                mdata.missing.push(required[i].name);
+            }
+            mdata.valid = false;
+        }
+        
+        return mdata;
+    };
+    
+    /**
+     * Utility functions that extracts the relevant data
+     */
+    var parseElement = function(el) {
+        if(!el.jquery) { el = $(el); }
+        // if the element in question isn't an itemscope, return null
+        if(!el.hasAttr('itemscope')) { return null; }
+        
+        var propElements = el.find('[itemprop]'), props = [], i;
+        propElements.each(function() {
+            var $p = $(this), propname = $p.attr('itemprop').toLowerCase().split(' '), v;
+            
+            for (i = 0; i < propname.length; i++) {
+                v = $p.text();
+
+                if ($p.is('a,area,link')) {
+                    v = $p.attr('href');
+                } else if ($p.is('audio,embed,iframe,img,source,video')) {
+                    v = $p.attr('src');
+                } else if ($p.is('object')) {
+                    v = $p.attr('data');
+                } else if ($p.is('time')) {
+                    v = $p.attr('datetime') || $p.text();
+                }
+                
+                props.push({
+                    name : propname[i],
+                    value : v
+                });
+            }
+        });
+        
+        return validateData({ type: el.attr('itemtype') || null, properties: props });
+    };
+    
+    
+    
     /**
      * Updates the list of microdata elements on the page
      */
@@ -137,34 +224,43 @@
     var addObject = function(element, mdata) {
         var type = mdata.type,
             t = $('<li title="' + type + '">' + (validators.url(type)? '<a href="' + type + '">' + type.replace(/^.*\//, '') + '</a>': "[no vocabulary]") + '</li>').appendTo(widget),
-            u = $('<ul/>').appendTo(t), rules = [], required = [], rule, prop, validationExists = false;
+            u = $('<ul/>').appendTo(t),
+            rules = [],
+            required = [],
+            rule,
+            prop,
+            validationExists = false,
+            i;
+        
+        mdata = (typeof mdata.valid === 'undefined')? mdata = validateData(mdata): mdata;
         
         if(mdata.properties.length > 0) {
-            if(validationRules.hasOwnProperty(type)) {
-                rules = validationRules[type];
-                required = $.grep(rules, function(item) { return item.required; });
-                validationExists = true;
-            }
-            for(var i = 0; i < mdata.properties.length; i++) {
+            
+            for(i = 0; i < mdata.properties.length; i++) {
                 prop = $('<li>' + mdata.properties[i].name + ' = ' + mdata.properties[i].value + '</li>').appendTo(u);
                 
+                if(!mdata.properties[i].valid) {
+                    prop.addClass('invalid');
+                }
+                /*
                 // if validation is present, validate the properties
                 if(validationExists) {
-                    rule = $.grep(rules, function(item) { return item.name == mdata.properties[i].name.toLowerCase(); });
+                    rule = $.grep(rules, function(item) { return item.name === mdata.properties[i].name.toLowerCase(); });
                     
                     // pop the field from the required list
-                    required = $.grep(required, function(item) { return item.name == mdata.properties[i].name.toLowerCase(); }, true);
+                    required = $.grep(required, function(item) { return item.name === mdata.properties[i].name.toLowerCase(); }, true);
                     
                     if(rule.length > 0 && !rule[0].validator(mdata.properties[i].value)) {
                         prop.addClass("invalid");
                     }
                 }
+                */
             }
             
             // any required properties not defined are appended to the list
-            if(required.length > 0) {
-                for(var i = 0; i < required.length; i++) {
-                    $('<li class="invalid">missing property: ' + required[i].name + '</li>').appendTo(u);
+            if(mdata.missing > 0) {
+                for(i = 0; i < mdata.missing.length; i++) {
+                    $('<li class="invalid">missing property: ' + mdata.missing[i] + '</li>').appendTo(u);
                 }
             }
         } else {
@@ -187,7 +283,7 @@
         clearObjects();
         refreshList();
         
-        if(items.length == 0) {
+        if(items.length === 0) {
             $('<li class="invalid">No microdata objects detected!</li>').appendTo(widget);
             return;
         }
@@ -204,56 +300,24 @@
         updateList();
     };
     
-    var parseElement = function(el) {
-        if(!el.jquery) el = $(el);
-        // if the element in question isn't an itemscope, return null
-        if(!el.hasAttr('itemscope')) return null;
-        
-        var propElements = el.find('[itemprop]'), props = [];
-        propElements.each(function() {
-            var $p = $(this), propname = $p.attr('itemprop').toLowerCase().split(' ');
-            
-            for (var i = 0; i < propname.length; i++) {
-                var v = $p.text();
-
-                if ($p.is('a,area,link'))
-                    v = $p.attr('href');
-                else if ($p.is('audio,embed,iframe,img,source,video'))
-                    v = $p.attr('src');
-                else if ($p.is('object'))
-                    v = $p.attr('data');
-                else if ($p.is('time')) v = $p.attr('datetime') || $p.text();
-                
-                props.push({
-                    name : propname[i],
-                    value : v
-                });
-            }
-        });
-        
-        return { type: el.attr('itemtype') || "", properties: props };
-    };
+    
     
     
     // expose functions for use by outside scripts via plugin
-    $.extend({
-        microdata: {
-            getItems: function() { return items; },
-            updateList: updateList,
-            parseElement: parseElement,
-            defaults: {
-                scope: 'body'
-            }
+    $.microdata = {
+        getItems: function() { return items; },
+        updateList: updateList,
+        parseElement: parseElement,
+        defaults: {
+            scope: 'body'
         }
-    });
+    };
     
-    $.fn.extend({
-        hasAttr: function(name) {
-            return typeof this.attr(name) !== 'undefined' || this.attr(name) !== false;
-        }
-    });
+    $.fn.hasAttr = function(name) {
+        return typeof this.attr(name) !== 'undefined' || this.attr(name) !== false;
+    };
     
     
     // init the drop-in script
-    $(function() { init(); });
+    $(init);
 })(jQuery);
