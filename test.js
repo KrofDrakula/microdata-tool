@@ -59,4 +59,17 @@ $(function() {
         }, 'Should return 1 good property and one missing');;
         
     });
+    
+    test('Single item with 1 invalid property per vocabulary rules', function() {
+        
+        same($.microdata.parseElement($('#single-item-invalid-property')), {
+            type: "http://data-vocabulary.org/Event",
+            properties: [
+                { name: "summary", value: "Event summary", valid: true },
+                { name: "startdate", value: "2011-08-05x", valid: false }
+            ],
+            missing: [], valid: false
+        }, 'Should return 1 invalid property and invalid object');
+        
+    });
 });

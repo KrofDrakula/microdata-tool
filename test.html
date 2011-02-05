@@ -42,6 +42,12 @@
                 <li itemscope id="single-item-missing-property" itemtype="http://data-vocabulary.org/Event">
                     <p itemprop="summary">This is the event summary</p>
                 </li>
+                
+                <!-- single item with both required properties, but one invalid property -->
+                <li itemscope id="single-item-invalid-property" itemtype="http://data-vocabulary.org/Event">
+                    <p itemprop="summary">Event summary</p>
+                    <time datetime="2011-08-05x" itemprop="startdate">Aug 5th 2011</time>
+                </li>
             </ul>
         </div>
     </body>
