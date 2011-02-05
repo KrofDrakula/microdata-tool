@@ -258,7 +258,7 @@
             }
             
             // any required properties not defined are appended to the list
-            if(mdata.missing > 0) {
+            if(mdata.missing.length > 0) {
                 for(i = 0; i < mdata.missing.length; i++) {
                     $('<li class="invalid">missing property: ' + mdata.missing[i] + '</li>').appendTo(u);
                 }
