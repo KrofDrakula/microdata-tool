@@ -55,7 +55,7 @@ strong { font-weight: bold; }
 a.go { font-size: 120%; font-weight: bold; }
 html { background: url(images/bg-gradient.jpg) 20% 0 no-repeat #000c2d }
 body { font: normal 120%/1.8em Garamond, serif; text-rendering:optimizeLegibility; color: white; }
-article { background: #224588; background: rgba(255,255,255,0.2); width: 540px; margin: 0 auto; padding: 20px; padding-bottom: 30em; }
+article { background: #224588; background: rgba(255,255,255,0.2); width: 540px; margin: 0 auto; padding: 20px; padding-bottom: 4em; }
 
 footer { text-align: center; font-size: 75% }
 header { text-align: center; padding: 1em; background: #4467aa; background: rgba(255,255,255,0.2); margin: 1em 0; }

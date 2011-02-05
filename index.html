@@ -2,21 +2,19 @@
 <html>
     <head>
         <meta charset="utf-8"/>
+        <title>Microdata Tool</title>
         <link rel="stylesheet" href="site.css"/>
         <script src="modernizr-1.6.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-        <script src="jquery.microdata.js"></script>
-        <script>
-          $(function() {
-              $('<div class="arrow"/>').appendTo('body');
-          });
-        </script>
+        <script src="lib/jquery.microdata.js"></script>
     </head>
     <body>
         <article>
             <footer>
                 <p itemscope itemtype="http://data-vocabulary.org/Person">
-                    A little development and optimization tool brought to you by <a href="http://github.com/KrofDrakula"><span itemprop="name">Klemen Slavič</span></a>.
+                    A little development and optimization tool brought to you by
+                    <a href="http://github.com/KrofDrakula" itemprop="url"><span itemprop="name">Klemen Slavič</span>,
+                    aka <span itemprop="nickname">KrofDrakula</span></a>.
                 </p>
             </footer>
             <header>
@@ -35,7 +33,7 @@
                 or even a <em>web server</em>.
             </p>
             <p>
-                See that arrow down in the left hand corner? Take a look.
+                See that little white box in the left hand corner? Take a look.
             </p>
             <p>
                 Want to start using it? <a href="https://github.com/KrofDrakula/microdata-tool" class="go">Go grab the code!</a>
@@ -45,10 +43,20 @@
             </p>
             <div class="instructions">
                 <p>
-                    Wanna try it out? Hover over each of the items on the list to highlight the
+                    Wanna try it out? Hover over each of the items in the white box to highlight the
                     relevant HTML elements in the document and click to see each object's properties.
                 </p>
             </div>
         </article>
+        <script type="text/javascript">
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-21183175-1']);
+		  _gaq.push(['_trackPageview']);
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+		</script>
     </body>
 </html>
