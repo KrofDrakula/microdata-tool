@@ -118,6 +118,13 @@
     
     
     /**
+     * Auxiliary function to replace all whitespace with a single space
+     */
+    var normalizeWhitespace = function(value) {
+        return $.trim(value.replace(/\s+/g, ' '));
+    };
+    
+    /**
      * Takes the result of parseElement and attaches the "valid" and "missing" properties,
      * then returns the augmented object
      */
@@ -192,7 +199,7 @@
                 
                 props.push({
                     name : propname[i],
-                    value : v
+                    value : $.trim(v)
                 });
             }
         });
@@ -242,19 +249,6 @@
                 if(!mdata.properties[i].valid) {
                     prop.addClass('invalid');
                 }
-                /*
-                // if validation is present, validate the properties
-                if(validationExists) {
-                    rule = $.grep(rules, function(item) { return item.name === mdata.properties[i].name.toLowerCase(); });
-                    
-                    // pop the field from the required list
-                    required = $.grep(required, function(item) { return item.name === mdata.properties[i].name.toLowerCase(); }, true);
-                    
-                    if(rule.length > 0 && !rule[0].validator(mdata.properties[i].value)) {
-                        prop.addClass("invalid");
-                    }
-                }
-                */
             }
             
             // any required properties not defined are appended to the list
