@@ -5,8 +5,9 @@ $(function() {
         same(res, {
             type: null,
             properties: [
-                { name: "description", value: "This is a description" }
-            ]
+                { name: "description", value: "This is a description", valid: true }
+            ],
+            valid: true, missing: []
         }, 'Should return null type, one property');
         
     });
@@ -15,7 +16,8 @@ $(function() {
         
         same($.microdata.parseElement($('#vocab-no-properties')), {
             type: "http://example.org/Type",
-            properties: []
+            properties: [],
+            valid: true, missing: []
         }, 'Should have type set to example.org');
     });
     
@@ -25,9 +27,10 @@ $(function() {
         same($.microdata.parseElement($('#multi-value-single-prop')), {
             type: "http://example.org/Multivalue",
             properties: [
-                { name: "attending", value: "Peter Bishop" },
-                { name: "attending", value: "Walter Bishop" }
-            ]
+                { name: "attending", value: "Peter Bishop", valid: true },
+                { name: "attending", value: "Walter Bishop", valid: true }
+            ],
+            valid: true, missing: []
         }, 'Should return an array of values');
         
     });
@@ -36,9 +39,24 @@ $(function() {
         same($.microdata.parseElement($('#multi-prop-single-value')), {
             type: "http://example.org/Multiprop",
             properties: [
-                { name: "admin", value: "true" },
-                { name: "user", value: "true" }
-            ]
+                { name: "admin", value: "true", valid: true },
+                { name: "user", value: "true", valid: true }
+            ],
+            valid: true, missing: []
         }, 'Should return multiple properties with same value');
+    });
+    
+    
+    test('Single item with 1 missing property per vocabulary rules', function() {
+        
+        same($.microdata.parseElement($('#single-item-missing-property')), {
+            type: "http://data-vocabulary.org/Event",
+            properties: [
+                { name: "summary", value: "This is the event summary", valid: true }
+            ],
+            missing: [ "startdate" ],
+            valid: false
+        }, 'Should return 1 good property and one missing');;
+        
     });
 });

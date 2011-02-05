@@ -8,7 +8,7 @@
         <script src="jquery.microdata.js"></script>
         <script src="test.js"></script>
     </head>
-    <body>
+    <body style="padding-bottom:200px">
         <h1 id="qunit-header">QUnit example</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
@@ -36,6 +36,11 @@
                 <!-- multiple properties, single value -->
                 <li itemscope id="multi-prop-single-value" itemtype="http://example.org/Multiprop">
                     <p itemprop="admin user">true</p>
+                </li>
+                
+                <!-- single item with one required and one missing property per the vocabulary rules -->
+                <li itemscope id="single-item-missing-property" itemtype="http://data-vocabulary.org/Event">
+                    <p itemprop="summary">This is the event summary</p>
                 </li>
             </ul>
         </div>
