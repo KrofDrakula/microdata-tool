@@ -1,6 +1,6 @@
 /*globals jQuery */
 (function($) {    
-    var items = [], widget,
+    var items = [], widget = null,
     
         // CSS styles injected into head
         // TODO: need to clean this up or externalize it
@@ -289,8 +289,6 @@
     };
     
     
-    
-    
     // expose functions for use by outside scripts via plugin
     $.microdata = {
         getItems: function() { return items; },
@@ -301,6 +299,9 @@
         }
     };
     
+    /**
+     * Adds the `hasAttr()` method to jQuery element wrapper
+     */
     $.fn.hasAttr = function(name) {
         return typeof this.attr(name) !== 'undefined' || this.attr(name) !== false;
     };
