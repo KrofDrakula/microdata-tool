@@ -159,6 +159,22 @@
             { name: "telephone",         required: false,  type: "text",      validator: validators.text     }
         ])
     });
+    schemaOrg.push({
+        url: "http://schema.org/Intangible",
+        fields: extend(findByUrl(schemaOrg, "http://schema.org/Thing"), [])
+    });
+    schemaOrg.push({
+        url: "http://schema.org/Product",
+        fields: extend(findByUrl(schemaOrg, "http://schema.org/Thing"), [
+            { name: "aggregateRating",  required: false,  type: "complex",  validator: validators.complex }, // a child element of AggregateRating
+            { name: "brand",            required: false,  type: "complex",  validator: validators.complex }, // a child element of Organization
+            { name: "manufacturer",     required: false,  type: "complex",  validator: validators.complex }, // a child element of Organization
+            { name: "model",            required: false,  type: "text",     validator: validators.text    },
+            { name: "offers",           required: false,  type: "complex",  validator: validators.complex }, // child elements of Offer
+            { name: "productId",        required: false,  type: "text",     validator: validators.text    },
+            { name: "reviews",          required: false,  type: "complex",  validator: validators.complex }  // child elements of Review
+        ])
+    });
     
     // add schema.org to the roster
     for (var i = 0; i < schemaOrg.length; i++) {
