@@ -205,6 +205,7 @@
         }
         
         items.each(function() { addObject(this, parseElement(this)); });
+        
     };
     
     var addDefinition = function(url, fields) {

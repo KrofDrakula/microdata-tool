@@ -4,29 +4,34 @@
         return;
     }
     
+    var validators = $.microdata.validators;
+    
     function extend(base, additions) {
         var ret = base.fields.slice();
         for (var i = 0; i < additions.length; i++) {
             if (!findField(additions[i].name))
-                ret.fields.push(additions[i]);
+                ret.push(additions[i]);
         }
         
-        function fieldField(name) {
-            for (var i = 0; i < ret.fields.length; i++) {
-                if (ret.fields[i].name == name) return ret.fields[i];
+        return ret;
+        
+        function findField(name) {
+            for (var i = 0; i < ret.length; i++) {
+                if (ret[i].name.toLowerCase() == name.toLowerCase()) return ret[i];
             }
             return false;
         }
     }
     
     function findByUrl(source, url) {
-        for (var i = 0; i < source.fields.length; i++) {
+        for (var i = 0; i < source.length; i++) {
             if (source[i].url == url) return source[i];
         }
         return null;
     }
     
     
+    // A partial implementation of data-vocabulary.org schemas
     var dataVocabulary = [
         {
             url: "http://data-vocabulary.org/Event",
@@ -104,5 +109,39 @@
     
     for (var i = 0; i < dataVocabulary.length; i++) {
         $.microdata.addDefinition(dataVocabulary[i].url, dataVocabulary[i].fields);
+    }
+    
+    // This section pertains to the schema.org definitions
+    
+    var schemaOrg = [
+        {
+            url: "http://schema.org/Thing",
+            fields: [
+                { name: "description",  required: false, type: "text", validator: validators.text },
+                { name: "image", required: false, type: "url", validator: validators.url },
+                { name: "name", required: false, type: "text", validator: validators.text },
+                { name: "url", required: false, type: "url", validator: validators.url }
+            ]
+        }
+    ];
+    schemaOrg.push(
+        {
+            url: "http://schema.org/Event",
+            fields: extend(findByUrl(schemaOrg, "http://schema.org/Thing"), [
+                { name: "attendees", required: false, type: "complex", validator: validators.complex }, // child elements of type Person or Organization
+                { name: "duration", required: false, type: "duration", validator: validators.duration },
+                { name: "endDate", required: false, type: "datetime", validator: validators.datetime },
+                { name: "location", required: false, type: "complex", validator: validators.complex }, // child elements of type Place or PostalAddress
+                { name: "offers", required: false, type: "complex", validator: validators.complex }, // child elements of type Offer
+                { name: "performers", required: false, type: "complex", validator: validators.complex }, // child elements of type Person or Organization
+                { name: "startDate", required: false, type: "datetime", validator: validators.datetime },
+                { name: "subEvents", required: false, type: "complex", validator: validators.complex }, // child elements of type Event
+                { name: "superEvent", required: false, type: "complex", validator: validators.complex } // a child element of type Event
+            ])
+        }
+    );
+    
+    for (var i = 0; i < schemaOrg.length; i++) {
+        $.microdata.addDefinition(schemaOrg[i].url, schemaOrg[i].fields);
     }
 })(jQuery);
