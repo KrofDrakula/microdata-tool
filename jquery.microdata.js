@@ -26,6 +26,8 @@
             
             url:       function(value, el) { return (/^https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:\/~\+#]*[\w\-\@?^=%&amp;\/~\+#])?$/).test(value); },
             
+            email:     function(value, el) { return (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/).text(value); },
+            
             int:       function(value, el) { return (/^\d+$/).test(value); },
             
             float:     function(value, el) { return (/^\d+([.,]\d*)?$/).test(value); },

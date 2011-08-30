@@ -107,6 +107,8 @@
         }
     ];
     
+    
+    // add the data-vocabulary.org validators to the plugin
     for (var i = 0; i < dataVocabulary.length; i++) {
         $.microdata.addDefinition(dataVocabulary[i].url, dataVocabulary[i].fields);
     }
@@ -117,30 +119,48 @@
         {
             url: "http://schema.org/Thing",
             fields: [
-                { name: "description",  required: false, type: "text", validator: validators.text },
-                { name: "image", required: false, type: "url", validator: validators.url },
-                { name: "name", required: false, type: "text", validator: validators.text },
-                { name: "url", required: false, type: "url", validator: validators.url }
+                { name: "description",  required: false,  type: "text",  validator: validators.text },
+                { name: "image",        required: false,  type: "url",   validator: validators.url  },
+                { name: "name",         required: false,  type: "text",  validator: validators.text },
+                { name: "url",          required: false,  type: "url",    validator: validators.url }
             ]
         }
     ];
-    schemaOrg.push(
-        {
-            url: "http://schema.org/Event",
-            fields: extend(findByUrl(schemaOrg, "http://schema.org/Thing"), [
-                { name: "attendees", required: false, type: "complex", validator: validators.complex }, // child elements of type Person or Organization
-                { name: "duration", required: false, type: "duration", validator: validators.duration },
-                { name: "endDate", required: false, type: "datetime", validator: validators.datetime },
-                { name: "location", required: false, type: "complex", validator: validators.complex }, // child elements of type Place or PostalAddress
-                { name: "offers", required: false, type: "complex", validator: validators.complex }, // child elements of type Offer
-                { name: "performers", required: false, type: "complex", validator: validators.complex }, // child elements of type Person or Organization
-                { name: "startDate", required: false, type: "datetime", validator: validators.datetime },
-                { name: "subEvents", required: false, type: "complex", validator: validators.complex }, // child elements of type Event
-                { name: "superEvent", required: false, type: "complex", validator: validators.complex } // a child element of type Event
-            ])
-        }
-    );
+    schemaOrg.push({
+        url: "http://schema.org/Event",
+        fields: extend(findByUrl(schemaOrg, "http://schema.org/Thing"), [
+            { name: "attendees",   required: false,  type: "complex",   validator: validators.complex  }, // child elements of type Person or Organization
+            { name: "duration",    required: false,  type: "duration",  validator: validators.duration },
+            { name: "endDate",     required: false,  type: "datetime",  validator: validators.datetime },
+            { name: "location",    required: false,  type: "complex",   validator: validators.complex  }, // child elements of type Place or PostalAddress
+            { name: "offers",      required: false,  type: "complex",   validator: validators.complex  }, // child elements of type Offer
+            { name: "performers",  required: false,  type: "complex",   validator: validators.complex  }, // child elements of type Person or Organization
+            { name: "startDate",   required: false,  type: "datetime",  validator: validators.datetime },
+            { name: "subEvents",   required: false,  type: "complex",   validator: validators.complex  }, // child elements of type Event
+            { name: "superEvent",  required: false,  type: "complex",   validator: validators.complex  }  // a child element of type Event
+        ])
+    });
+    schemaOrg.push({
+        url: "http://schema.org/Organization",
+        fiels: extend(findByUrl(schemaOrg, "http://schema.org/Thing"), [
+            { name: "address",           required: false,  type: "complex",   validator: validators.complex  }, // a child element of PostalAddress
+            { name: "aggregatRating",    required: false,  type: "complex",   validator: validators.complex  }, // a child element of AggregateRating
+            { name: "contactPoints",     required: false,  type: "complex",   validator: validators.complex  }, // child elements of ContactPoint
+            { name: "email",             required: false,  type: "text",      validator: validators.email    },
+            { name: "employees",         required: false,  type: "complex",   validator: validators.complex  }, // child elements of Person
+            { name: "events",            required: false,  type: "complex",   validator: validators.complex  }, // a child element of Event 
+            { name: "faxNumber",         required: false,  type: "text",      validator: validators.text     },
+            { name: "founders",          required: false,  type: "complex",   validator: validators.complex  }, // child elements of type Person
+            { name: "foundingDate",      required: false,  type: "datetime",  validator: validators.datetime },
+            { name: "interactionCount",  required: false,  type: "text",      validator: validators.text     }, // should be one of the types of UserInteraction
+            { name: "location",          required: false,  type: "complex",   validator: validators.complex  }, // a child element of Place or PostalAddress
+            { name: "members",           required: false,  type: "complex",   validator: validators.complex  }, // child elements of Person or Organization
+            { name: "reviews",           required: false,  type: "complex",   validator: validators.complex  }, // child elements of Review
+            { name: "telephone",         required: false,  type: "text",      validator: validators.text     }
+        ])
+    });
     
+    // add schema.org to the roster
     for (var i = 0; i < schemaOrg.length; i++) {
         $.microdata.addDefinition(schemaOrg[i].url, schemaOrg[i].fields);
     }
