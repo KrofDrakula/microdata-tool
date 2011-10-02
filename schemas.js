@@ -122,7 +122,7 @@
                 { name: "description",  required: false,  type: "text",  validator: validators.text },
                 { name: "image",        required: false,  type: "url",   validator: validators.url  },
                 { name: "name",         required: false,  type: "text",  validator: validators.text },
-                { name: "url",          required: false,  type: "url",    validator: validators.url }
+                { name: "url",          required: false,  type: "url",   validator: validators.url  }
             ]
         }
     ];
@@ -173,6 +173,43 @@
             { name: "offers",           required: false,  type: "complex",  validator: validators.complex }, // child elements of Offer
             { name: "productId",        required: false,  type: "text",     validator: validators.text    },
             { name: "reviews",          required: false,  type: "complex",  validator: validators.complex }  // child elements of Review
+        ])
+    });
+    schemaOrg.push({
+        url: "http://schema.org/Person",
+        fields: extend(findByUrl(schemaOrg, "http://schema.org/Thing"), [
+            { name: "additionalName",   required: false, type: "text",      validator: validators.text     },
+            { name: "address",          required: false, type: "complex",   validator: validators.complex  }, // a child element of PostalAddress
+            { name: "affiliation",      required: false, type: "complex",   validator: validators.complex  }, // a child element of Organization
+            { name: "alumniOf",         required: false, type: "complex",   validator: validators.complex  }, // a child element of EducationalOrganization
+            { name: "awards",           required: false, type: "text",      validator: validators.text     },
+            { name: "birthDate",        required: false, type: "datetime",  validator: validators.datetime },
+            { name: "children",         required: false, type: "complex",   validator: validators.complex  }, // child elements of Person
+            { name: "colleagues",       required: false, type: "complex",   validator: validators.complex  }, // child elements of Person
+            { name: "contactPoints",    required: false, type: "complex",   validator: validators.complex  }, // child elements of ContactPoint
+            { name: "deathDate",        required: false, type: "datetime",  validator: validators.datetime }, // hopefully null
+            { name: "email",            required: false, type: "email",     validator: validators.email    },
+            { name: "familyName",       required: false, type: "text",      validator: validators.text     },
+            { name: "faxNumber",        required: false, type: "text",      validator: validators.text     },
+            { name: "follows",          required: false, type: "complex",   validator: validators.complex  }, // child elements of Person
+            { name: "gender",           required: false, type: "text",      validator: validators.text     }, // oddly enough, does not enumerate valid values
+            { name: "givenName",        required: false, type: "text",      validator: validators.text     },
+            { name: "homeLocation",     required: false, type: "complex",   validator: validators.complex  }, // a child element of Place or ContactPoint
+            { name: "honorificPrefix",  required: false, type: "text",      validator: validators.text     }, // something along the lines of Mr., Mrs., etc.
+            { name: "honorificSuffix",  required: false, type: "text",      validator: validators.text     }, // similarly, M.D., PhD., etc.
+            { name: "interactionCount", required: false, type: "text",      validator: validators.text     }, // example: "20 UserLikes, 5 UserComments"
+            { name: "jobTitle",         required: false, type: "text",      validator: validators.text     }, // example: "Lion tamer"
+            { name: "knows",            required: false, type: "complex",   validator: validators.complex  }, // child elements of Person
+            { name: "memberOf",         required: false, type: "complex",   validator: validators.complex  }, // child elements of Organization
+            { name: "nationality",      required: false, type: "complex",   validator: validators.complex  }, // a child element of Country
+            { name: "parents",          required: false, type: "complex",   validator: validators.complex  }, // child elements of Person
+            { name: "performerIn",      required: false, type: "complex",   validator: validators.complex  }, // child elements of Event
+            { name: "relatedTo",        required: false, type: "complex",   validator: validators.complex  }, // child elements of Person
+            { name: "siblings",         required: false, type: "complex",   validator: validators.complex  }, // child elements of Person
+            { name: "spouse",           required: false, type: "complex",   validator: validators.complex  }, // a child element of Person (as wrong as that sounds)
+            { name: "telephone",        required: false, type: "text",      validator: validators.text     },
+            { name: "workLocation",     required: false, type: "complex",   validator: validators.complex  }, // a child element of Location or ContactPoint
+            { name: "worksFor",         required: false, type: "complex",   validator: validators.complex  }  // a child element of Organization
         ])
     });
     
