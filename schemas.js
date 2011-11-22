@@ -212,6 +212,29 @@
             { name: "worksFor",         required: false, type: "complex",   validator: validators.complex  }  // a child element of Organization
         ])
     });
+
+    schemaOrg.push({
+        url: "http://schema.org/Offer",
+        fields: extend(findByUrl(schemaOrg, "http://schema.org/Intangible"), [
+            { name: "aggregateRating",  required: false,  type: "complex",  validator: validators.complex }, // AggregateRating schema child element
+            { name: "availability",     required: false,  type: "complex",  validator: validators.complex }, // ItemAvailability schema child element
+            { name: "itemCondition",    required: false,  type: "complex",  validator: validators.complex }, // OfferItemCondition schema child element
+            { name: "itemOffered",      required: false,  type: "complex",  validator: validators.complex }, // Product schema child element
+            { name: "price",            required: false,  type: "text",     validator: validators.text    },
+            { name: "priceCurrency",    required: false,  type: "text",     validator: validators.text    },
+            { name: "priceValidUntil",  required: false,  type: "text",     validator: validators.text    },
+            { name: "reviews",          required: false,  type: "complex",  validator: validators.complex }, // Review schema child element
+            { name: "seller",           required: false,  type: "complex",  validator: validators.complex }  // Organization schema child element
+        ])
+    });
+    schemaOrg.push({
+        url: "http://schema.org/AggregateOffer",
+        fields: extend(findByUrl(schemaOrg, "http://schema.org/Offer"), [
+            { name: "highPrice",        required: false,  type: "text",	validator: validators.text	},
+            { name: "lowPrice",         required: false,  type: "text",	validator: validators.text	},
+            { name: "offerCount",       required: false,  type: "text",	validator: validators.text	}
+        ])
+    });
     
     // add schema.org to the roster
     for (var i = 0; i < schemaOrg.length; i++) {
