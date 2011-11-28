@@ -18,5 +18,5 @@ This tool is a work-in-progress and still doesn't adhere to the full specs (yet)
 Plans to support the full microdata spec + data vocabulary validation are on
 the drawing board. ;)
 
-Thanks to @peterhost we now have a bookmarklet available (source: https://gist.github.com/1397528)
-for your use without having to modify your page's source code!
+Thanks to [@peterhost](https://gist.github.com/peterhost) we now have a bookmarklet available 
+(source: https://gist.github.com/1397528) for your use without having to modify your page's source code!
