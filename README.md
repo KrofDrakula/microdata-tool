@@ -20,3 +20,5 @@ the drawing board. ;)
 
 Thanks to [@peterhost](https://github.com/peterhost) we now have a bookmarklet available 
 (source: https://gist.github.com/1397528) for your use without having to modify your page's source code!
+Simply visit [this page](http://jsfiddle.net/peterhost/ZJfpL/14/embedded/result/) and drag
+the link to your bookmark bar and you're set to go.
