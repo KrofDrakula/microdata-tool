@@ -115,7 +115,9 @@
             for (i = 0; i < propname.length; i++) {
                 v = $p.text();
 
-                if ($p.is('a,area,link')) {
+                if ($p.is('meta')) {
+                    v = $p.attr('content');
+                } else if ($p.is('a,area,link')) {
                     v = $p.attr('href');
                 } else if ($p.is('audio,embed,iframe,img,source,video')) {
                     v = $p.attr('src');
