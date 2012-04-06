@@ -142,7 +142,7 @@
     });
     schemaOrg.push({
         url: "http://schema.org/Organization",
-        fiels: extend(findByUrl(schemaOrg, "http://schema.org/Thing"), [
+        fields: extend(findByUrl(schemaOrg, "http://schema.org/Thing"), [
             { name: "address",           required: false,  type: "complex",   validator: validators.complex  }, // a child element of PostalAddress
             { name: "aggregatRating",    required: false,  type: "complex",   validator: validators.complex  }, // a child element of AggregateRating
             { name: "contactPoints",     required: false,  type: "complex",   validator: validators.complex  }, // child elements of ContactPoint
