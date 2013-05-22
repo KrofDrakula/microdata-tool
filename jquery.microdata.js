@@ -46,7 +46,7 @@
             
             any: function(value, el) { return true; },
 
-			boolean: function(value, el) { return (/(True|False)/).test(value); }
+            boolean: function(value, el) { return (/(True|False)/i).test(value); }
         },
         
         
