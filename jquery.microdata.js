@@ -44,7 +44,9 @@
             // TODO: check three-letter ISO code for currency: http://www.iso.org/iso/support/faqs/faqs_widely_used_standards/widely_used_standards_other/currency_codes.htm
             currency:  function(value, el) { return (/^[a-zA-Z]{3}$/).test(value); },
             
-            any: function(value, el) { return true; }
+            any: function(value, el) { return true; },
+
+            boolean: function(value, el) { return (/(True|False)/i).test(value); }
         },
         
         
