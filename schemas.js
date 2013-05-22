@@ -176,6 +176,70 @@
         ])
     });
     schemaOrg.push({
+        url: "http://schema.org/CreativeWork",
+        fields: extend(findByUrl(schemaOrg, "http://schema.org/Thing"), [
+            {name: "about",                required: false, type: "complex",  validator: validators.text },
+            {name: "accountablePerson",    required: false, type: "complex",  validator: validators.text },
+            {name: "aggregateRating",      required: false, type: "complex",  validator: validators.text },
+            {name: "alternativeHeadline",  required: false, type: "text",     validator: validators.text },
+            {name: "associatedMedia",      required: false, type: "complex",  validator: validators.text },
+            {name: "audience",             required: false, type: "complex",  validator: validators.text },
+            {name: "audio",                required: false, type: "complex",  validator: validators.complex },
+            {name: "author",               required: false, type: "complex",  validator: validators.complex },
+            {name: "award",                required: false, type: "text",     validator: validators.text },
+            {name: "awards",               required: false, type: "text",     validator: validators.text },
+            {name: "comment",              required: false, type: "complex",  validator: validators.complex },
+            {name: "contentLocation",      required: false, type: "complex",  validator: validators.complex },
+            {name: "contentRating",        required: false, type: "text",     validator: validators.text },
+            {name: "contributor",          required: false, type: "complex",  validator: validators.complex },
+            {name: "copyrightHolder",      required: false, type: "complex",  validator: validators.complex },
+            {name: "copyrightYear",        required: false, type: "number",   validator: validators.number },
+            {name: "creator",              required: false, type: "complex",  validator: validators.complex },
+            {name: "dateCreated",          required: false, type: "datetime", validator: validators.datetime },
+            {name: "dateModified",         required: false, type: "datetime", validator: validators.datetime },
+            {name: "datePublished",        required: false, type: "datetime", validator: validators.datetime },
+            {name: "discussionUrl",        required: false, type: "url",      validator: validators.url },
+            {name: "editor",               required: false, type: "complex",  validator: validators.complex },
+            {name: "educationalAlignment", required: false, type: "complex",  validator: validators.complex },
+            {name: "educationalUse",       required: false, type: "text",     validator: validators.text },
+            {name: "encoding",             required: false, type: "complex",  validator: validators.complex },
+            {name: "encodings",            required: false, type: "complex",  validator: validators.complex },
+            {name: "genre",                required: false, type: "text",     validator: validators.text },
+            {name: "headline",             required: false, type: "text",     validator: validators.text },
+            {name: "inLanguage",           required: false, type: "text",     validator: validators.text },
+            {name: "interactionCount",     required: false, type: "text",     validator: validators.text },
+            {name: "interactivityType",    required: false, type: "text",     validator: validators.text },
+            {name: "isBasedOnUrl",         required: false, type: "url",      validator: validators.url },
+            {name: "isFamilyFriendly",     required: false, type: "boolean",  validator: validators.boolean },
+            {name: "keywords",             required: false, type: "text",     validator: validators.text },
+            {name: "learningResourceType", required: false, type: "text",     validator: validators.text },
+            {name: "mentions",             required: false, type: "complex",  validator: validators.complex },
+            {name: "offers",               required: false, type: "complex",  validator: validators.complex },
+            {name: "provider",             required: false, type: "complex",  validator: validators.complex },
+            {name: "publisher",            required: false, type: "complex",  validator: validators.complex },
+            {name: "publishingPrinciples", required: false, type: "url",      validator: validators.url },
+            {name: "review",               required: false, type: "complex",  validator: validators.complex },
+            {name: "reviews",              required: false, type: "complex",  validator: validators.complex },
+            {name: "sourceOrganization",   required: false, type: "complex",  validator: validators.complex },
+            {name: "text",                 required: false, type: "text",     validator: validators.text },
+            {name: "thumbnailUrl",         required: false, type: "url",      validator: validators.url },
+            {name: "timeRequired",         required: false, type: "duration", validator: validators.duration },
+            {name: "typicalAgeRange",      required: false, type: "text",     validator: validators.text },
+            {name: "version",              required: false, type: "number",   validator: validators.number },
+            {name: "video" ,               required: false, type: "complex",  validator: validators.complex }
+        ])
+    });
+    schemaOrg.push({
+        url: "http://schema.org/Book",
+        fields: extend(findByUrl(schemaOrg, "http://schema.org/CreativeWork"), [
+            { name: "bookEdition",   required: false, type: "text",    validator: validators.text },
+            { name: "bookFormat",    required: false, type: "complex", validator: validators.complex },
+            { name: "illustrator",   required: false, type: "complex", validator: validators.complex },
+            { name: "isbn",          required: false, type: "text",    validator: validators.text },
+            { name: "numberOfPages", required: false, type: "int",     validator: validators.int }
+        ])
+    });
+    schemaOrg.push({
         url: "http://schema.org/Person",
         fields: extend(findByUrl(schemaOrg, "http://schema.org/Thing"), [
             { name: "additionalName",   required: false, type: "text",      validator: validators.text     },
