@@ -137,23 +137,23 @@ var schemaOrg = [
         url: "http://schema.org/Event",
         fields: extend(findByUrl(schemaOrg, "http://schema.org/Thing"), [
 		
-		 	{name: "attendee",					required: false,	type: "complex",		validator: validators.complex		}, // new, child elements of type Person or Organization
-		 	{name: "doorTime",					required: false,	type: "datetime",		validator: validators.datetime	},  // new, 
-            { name: "attendees",   				required: false,  type: "complex",   	validator: validators.complex  	}, // child elements of type Person or Organization
-		 	{name: "doorTime",					required: false,	type: "datetime",		validator: validators.datetime	}, 
-            { name: "duration",    				required: false,  type: "duration",  	validator: validators.duration 	},
-            { name: "endDate",     				required: false,  type: "datetime",  	validator: validators.datetime 	},
-		 	{name: "eventStatus",				required: false,	type: "complex",		validator: validators.complex		},
-            { name: "location",    				required: false,  type: "complex",   	validator: validators.complex  	}, // child elements of type Place or PostalAddress
-            { name: "offers",      				required: false,  type: "complex",   	validator: validators.complex  	}, // child elements of type Offer
-		 	{name: "performer",				required: false,	type: "complex",		validator: validators.complex		},
-            { name: "performers",  			required: false,  type: "complex",   	validator: validators.complex  	}, // child elements of type Person or Organization
-		 	{name: "previousStartDate",	required: false,	type: "date",				validator: validators.date			}, 
-            { name: "startDate",  				required: false,  type: "datetime",  	validator: validators.datetime 	},
-		 	{name: "subEvent",					required: false,	type: "complex",		validator: validators.complex		}, // new, child elements of type Event
-            { name: "subEvents",   			required: false,  type: "complex",   	validator: validators.complex  	}, // child elements of type Event
-            { name: "superEvent",  			required: false,  type: "complex",   	validator: validators.complex  	},  // a child element of type Event
-		 	{name: "typicalAgeRange",		required: false,	type: "text",				validator: validators.text			}
+		{name: "attendee",		required: false,	type: "complex",		validator: validators.complex		}, // new, child elements of type Person or Organization
+	 	{name: "doorTime",		required: false,	type: "datetime",		validator: validators.datetime	},  // new, 
+            { name: "attendees",   		required: false,  type: "complex",   	validator: validators.complex  	}, // child elements of type Person or Organization
+	 	{name: "doorTime",		required: false,	type: "datetime",		validator: validators.datetime	}, 
+            { name: "duration",    		required: false,  type: "duration",  	validator: validators.duration 	},
+            { name: "endDate",     		required: false,  type: "datetime",  	validator: validators.datetime 	},
+	 	{name: "eventStatus",		required: false,	type: "complex",		validator: validators.complex		},
+            { name: "location",    		required: false,  type: "complex",   	validator: validators.complex  	}, // child elements of type Place or PostalAddress
+            { name: "offers",      		required: false,  type: "complex",   	validator: validators.complex  	}, // child elements of type Offer
+	 	{name: "performer",		required: false,	type: "complex",		validator: validators.complex		},
+            { name: "performers",  		required: false,  type: "complex",   	validator: validators.complex  	}, // child elements of type Person or Organization
+	 	{name: "previousStartDate",	required: false,	type: "date",				validator: validators.date			}, 
+            { name: "startDate",  		required: false,  type: "datetime",  	validator: validators.datetime 	},
+	 	{name: "subEvent",		required: false,	type: "complex",		validator: validators.complex		}, // new, child elements of type Event
+            { name: "subEvents",   		required: false,  type: "complex",   	validator: validators.complex  	}, // child elements of type Event
+            { name: "superEvent",  		required: false,  type: "complex",   	validator: validators.complex  	},  // a child element of type Event
+	 	{name: "typicalAgeRange",	required: false,	type: "text",				validator: validators.text			}
 			
         ])
     });
@@ -1157,7 +1157,7 @@ schemaOrg.push({
  	{name: "customer",					required: false,	type: "complex",		validator: validators.complex		},
  	{name: "discount",					required: false,	type: "text",				validator: validators.text			},
  	{name: "discountCode",			required: false,	type: "text",				validator: validators.text			},
- 	{ name: "discountCurrency",		required: false,	type: "currency",		validator: validators.currency		}
+ 	{ name: "discountCurrency",		required: false,	type: "currency",		validator: validators.currency		},
  	{name: "isGift",						required: false,	type: "boolean",		validator: validators.boolean		},
  	{name: "merchant",					required: false,	type: "complex",		validator: validators.complex		},
  	{name: "orderDate",				required: false,	type: "datetime",		validator: validators.datetime	},
