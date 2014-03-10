@@ -18,7 +18,7 @@ This tool is a work-in-progress and still doesn't adhere to the full specs (yet)
 Plans to support the full microdata spec + data vocabulary validation are on
 the drawing board. ;)
 
-#6.03.2014 - Changes made by Evgeniy Orlov, chilly_bang@yahoo.de#
+#UPDATE 6.03.2014#
 
 -- schemas.js:  Added 106 new classes with properties accordingly to official Schema Version 1.0f
 
