@@ -22,3 +22,12 @@ Thanks to [@peterhost](https://github.com/peterhost) we now have a bookmarklet a
 (source: https://gist.github.com/1397528) for your use without having to modify your page's source code!
 Simply visit [this page](http://jsfiddle.net/peterhost/ZJfpL/14/embedded/result/) and drag
 the link to your bookmark bar and you're set to go.
+
+6.03.2014 - Changes made by Evgeniy Orlov, chilly_bang@yahoo.de
+
+-- schemas.js:  Added 106 new classes with properties accordingly to official Schema Version 1.0f
+
+-- jquery.microdata.js:  Added validations for number and data
+
+-- file schemas-stub.js added. File contains the part of code for adding new classes/properties to schemas.js.
+For adding new classes/properties: open schemas-stub.js, copy and edit code, add the code to schemas.js, like it done there.
