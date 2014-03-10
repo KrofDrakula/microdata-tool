@@ -32,9 +32,15 @@
             
             float:     function(value, el) { return (/^\d+([.,]\d*)?$/).test(value); },
             
+			// ADD 6.03.2014: Number (both of int and float) Validation
+			 number:  function(value, el) { return (/(\d+(.\d+)?)/).test(value); },
+			 
+			 // ADD 6.03.2014: Date Validation
+            date:  function(value, el) { return (/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/).test(value); },
+			
             // TODO: need a proper datetime validator
             datetime:  function(value, el) { return (/^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2})?)?$/).test(value); },
-            
+			
             // TODO: check the duration per http://en.wikipedia.org/wiki/ISO_8601#Durations
             duration:  function(value, el) { return (/^P(([0-9.,]+[YMD])*(T[0-9.,]+[HMS])*|[0-9.,]W)$/).test(value); },
             
@@ -44,6 +50,8 @@
             // TODO: check three-letter ISO code for currency: http://www.iso.org/iso/support/faqs/faqs_widely_used_standards/widely_used_standards_other/currency_codes.htm
             currency:  function(value, el) { return (/^[a-zA-Z]{3}$/).test(value); },
             
+			//Validation TODOs: Geocoordinates, Geo-shape, Country: two-letter ISO 3166-1 alpha-2
+			
             any: function(value, el) { return true; },
 
             boolean: function(value, el) { return (/(True|False)/i).test(value); }
