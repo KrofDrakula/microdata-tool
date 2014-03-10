@@ -18,12 +18,7 @@ This tool is a work-in-progress and still doesn't adhere to the full specs (yet)
 Plans to support the full microdata spec + data vocabulary validation are on
 the drawing board. ;)
 
-Thanks to [@peterhost](https://github.com/peterhost) we now have a bookmarklet available 
-(source: https://gist.github.com/1397528) for your use without having to modify your page's source code!
-Simply visit [this page](http://jsfiddle.net/peterhost/ZJfpL/14/embedded/result/) and drag
-the link to your bookmark bar and you're set to go.
-
-6.03.2014 - Changes made by Evgeniy Orlov, chilly_bang@yahoo.de
+#6.03.2014 - Changes made by Evgeniy Orlov, chilly_bang@yahoo.de#
 
 -- schemas.js:  Added 106 new classes with properties accordingly to official Schema Version 1.0f
 
