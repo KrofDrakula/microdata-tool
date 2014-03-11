@@ -137,23 +137,23 @@ var schemaOrg = [
         url: "http://schema.org/Event",
         fields: extend(findByUrl(schemaOrg, "http://schema.org/Thing"), [
 		
-		{name: "attendee",		required: false,	type: "complex",		validator: validators.complex		}, // new, child elements of type Person or Organization
-	 	{name: "doorTime",		required: false,	type: "datetime",		validator: validators.datetime	},  // new, 
-            { name: "attendees",   		required: false,  type: "complex",   	validator: validators.complex  	}, // child elements of type Person or Organization
-	 	{name: "doorTime",		required: false,	type: "datetime",		validator: validators.datetime	}, 
-            { name: "duration",    		required: false,  type: "duration",  	validator: validators.duration 	},
-            { name: "endDate",     		required: false,  type: "datetime",  	validator: validators.datetime 	},
-	 	{name: "eventStatus",		required: false,	type: "complex",		validator: validators.complex		},
-            { name: "location",    		required: false,  type: "complex",   	validator: validators.complex  	}, // child elements of type Place or PostalAddress
-            { name: "offers",      		required: false,  type: "complex",   	validator: validators.complex  	}, // child elements of type Offer
-	 	{name: "performer",		required: false,	type: "complex",		validator: validators.complex		},
-            { name: "performers",  		required: false,  type: "complex",   	validator: validators.complex  	}, // child elements of type Person or Organization
-	 	{name: "previousStartDate",	required: false,	type: "date",				validator: validators.date			}, 
-            { name: "startDate",  		required: false,  type: "datetime",  	validator: validators.datetime 	},
-	 	{name: "subEvent",		required: false,	type: "complex",		validator: validators.complex		}, // new, child elements of type Event
-            { name: "subEvents",   		required: false,  type: "complex",   	validator: validators.complex  	}, // child elements of type Event
-            { name: "superEvent",  		required: false,  type: "complex",   	validator: validators.complex  	},  // a child element of type Event
-	 	{name: "typicalAgeRange",	required: false,	type: "text",				validator: validators.text			}
+		 	{name: "attendee",					required: false,	type: "complex",		validator: validators.complex		}, // new, child elements of type Person or Organization
+		 	{name: "doorTime",					required: false,	type: "datetime",		validator: validators.datetime	},  // new, 
+            { name: "attendees",   				required: false,  type: "complex",   	validator: validators.complex  	}, // child elements of type Person or Organization
+		 	{name: "doorTime",					required: false,	type: "datetime",		validator: validators.datetime	}, 
+            { name: "duration",    				required: false,  type: "duration",  	validator: validators.duration 	},
+            { name: "endDate",     				required: false,  type: "datetime",  	validator: validators.datetime 	},
+		 	{name: "eventStatus",				required: false,	type: "complex",		validator: validators.complex		},
+            { name: "location",    				required: false,  type: "complex",   	validator: validators.complex  	}, // child elements of type Place or PostalAddress
+            { name: "offers",      				required: false,  type: "complex",   	validator: validators.complex  	}, // child elements of type Offer
+		 	{name: "performer",				required: false,	type: "complex",		validator: validators.complex		},
+            { name: "performers",  			required: false,  type: "complex",   	validator: validators.complex  	}, // child elements of type Person or Organization
+		 	{name: "previousStartDate",	required: false,	type: "date",				validator: validators.date			}, 
+            { name: "startDate",  				required: false,  type: "datetime",  	validator: validators.datetime 	},
+		 	{name: "subEvent",					required: false,	type: "complex",		validator: validators.complex		}, // new, child elements of type Event
+            { name: "subEvents",   			required: false,  type: "complex",   	validator: validators.complex  	}, // child elements of type Event
+            { name: "superEvent",  			required: false,  type: "complex",   	validator: validators.complex  	},  // a child element of type Event
+		 	{name: "typicalAgeRange",		required: false,	type: "text",				validator: validators.text			}
 			
         ])
     });
@@ -1915,6 +1915,557 @@ schemaOrg.push({
 		])
 });
 
+//Add at 11.03.2014, mostly empty classes
+
+
+schemaOrg.push({
+	url: "http://schema.org/AchieveAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/Action"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/Intangible",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/AchieveAction"), [
+
+ 	{name: "winner",		required: false,	type: "complex",		validator: validators.complex		}
+	
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/Intangible",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/AchieveAction"), [
+
+ 	{name: "loser",		required: false,	type: "complex",		validator: validators.complex		}
+	
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/TieAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/AchieveAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/AssessAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/Action"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/ChooseAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/AssessAction"), [
+
+ 	{name: "option",		required: false,	type: "complex",		validator: validators.complex		}
+	
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/VoteAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/ChooseAction"), [
+
+ 	{name: "candidate",		required: false,	type: "complex",		validator: validators.complex		}
+	
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/IgnoreAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/AssessAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/ReactAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/AssessAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/AgreeAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/ReactAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/DisagreeAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/ReactAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/DislikeAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/ReactAction"), [
+
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/EndorseAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/ReactAction"), [
+
+		{name: "endorsee",		required: false,	type: "complex",		validator: validators.complex		}
+
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/LikeAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/ReactAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/WantAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/ReactAction"), [
+
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/ReviewAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/AssessAction"), [
+
+ 	{name: "resultReview",		required: false,	type: "complex",		validator: validators.complex		}
+	
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/ConsumeAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/Action"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/DrinkAction",
+		fields: extend(findByUrl(schemaOrg, "ConsumeAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/EatAction",
+		fields: extend(findByUrl(schemaOrg, "ConsumeAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/InstallAction",
+		fields: extend(findByUrl(schemaOrg, "ConsumeAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/ListenAction",
+		fields: extend(findByUrl(schemaOrg, "ConsumeAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/ReadAction",
+		fields: extend(findByUrl(schemaOrg, "ConsumeAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/UseAction",
+		fields: extend(findByUrl(schemaOrg, "ConsumeAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/ViewAction",
+		fields: extend(findByUrl(schemaOrg, "ConsumeAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/WatchAction",
+		fields: extend(findByUrl(schemaOrg, "ConsumeAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/WearAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/UseAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/CreateAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/Action"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/CookAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/CreateAction"), [
+
+ 	{name: "foodEstablishment",	required: false,	type: "complex",		validator: validators.complex		},
+ 	{name: "foodEvent",				required: false,	type: "complex",		validator: validators.complex		},
+ 	{name: "recipe",						required: false,	type: "complex",		validator: validators.complex		}
+	
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/DrawAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/CreateAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/FilmAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/CreateAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/PaintAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/CreateAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/PhotographAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/CreateAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/WriteAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/CreateAction"), [
+		
+ 	{name: "language",		required: false,	type: "complex",		validator: validators.complex		}
+	
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/FindAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/Action"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/CheckAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/FindAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/DiscoverAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/FindAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/TrackAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/FindAction"), [
+
+		{name: "deliveryMethod",		required: false,	type: "complex",		validator: validators.complex		}
+		
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/InteractAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/Action"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/BefriendAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/InteractAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/CommunicateAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/InteractAction"), [
+		
+		{name: "about",		required: false,	type: "complex",		validator: validators.complex		},	
+		{name: "language",	required: false,	type: "complex",		validator: validators.complex		},	
+		{name: "recipient",	required: false,	type: "complex",		validator: validators.complex		}
+		
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/FollowAction",
+	
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/InteractAction"), [
+
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/JoinAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/InteractAction"), [
+		
+{name: "event",		required: false,	type: "complex",		validator: validators.complex		}
+		
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/LeaveAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/InteractAction"), [
+		
+		{name: "event",		required: false,	type: "complex",		validator: validators.complex		}
+		
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/MarryAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/InteractAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/RegisterAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/InteractAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/SubscribeAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/InteractAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/UnRegisterAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/InteractAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/AskAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/CommunicateAction"), [
+
+			{name: "question",		required: false,	type: "text",		validator: validators.text	}
+	
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/CheckInAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/CommunicateAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/CheckOutAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/CommunicateAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/CommentAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/CommunicateAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/InformAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/CommunicateAction"), [
+
+ 	{name: "event",		required: false,	type: "complex",		validator: validators.complex		}
+	
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/InviteAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/CommunicateAction"), [
+
+ 	{name: "event",		required: false,	type: "complex",		validator: validators.complex		}
+	
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/ReplyAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/CommunicateAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/ShareAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/CommunicateAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/ConfirmAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/InformAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/RsvpAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/InformAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/MoveAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/Action"), [
+		
+	{name: "fromLocation",	required: false,	type: "complex",		validator: validators.complex		},
+ 	{name: "toLocation",		required: false,	type: "complex",		validator: validators.complex		}
+	
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/ArriveAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/MoveAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/DepartAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/MoveAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/TravelAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/MoveAction"), [
+
+ 	{name: "distance",		required: false,	type: "complex",		validator: validators.complex		}
+	
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/OrganizeAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/Action"), [
+])
+});
+
+
+schemaOrg.push({
+	url: "http://schema.org/AllocateAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/OrganizeAction"), [
+		
+		 	{name: "purpose",		required: false,	type: "complex",		validator: validators.complex		}
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/AcceptAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/AllocateAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/AssignAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/AllocateAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/AuthorizeAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/AllocateAction"), [
+
+		 	{name: "recipient",		required: false,	type: "complex",		validator: validators.complex		}
+
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/RejectAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/AllocateAction"), [
+])
+});
+
+
+schemaOrg.push({
+	url: "http://schema.org/ApplyAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/OrganizeAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/BookmarkAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/OrganizeAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/PlanAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/OrganizeAction"), [
+
+		 	{name: "scheduledTime",		required: false,	type: "datetime",		validator: validators.datetime	}
+
+])
+});
+		
+schemaOrg.push({
+	url: "http://schema.org/CancelAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/PlanAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/ReserveAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/PlanAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/ScheduleAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/PlanAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/AddAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/UpdateAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/InsertAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/AddAction"), [
+		
+		 	{name: "toLocation",		required: false,	type: "complex",		validator: validators.complex		}
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/AppendAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/InsertAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/PrependAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/InsertAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/DeleteAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/UpdateAction"), [
+])
+});
+
+schemaOrg.push({
+	url: "http://schema.org/ReplaceAction",
+		fields: extend(findByUrl(schemaOrg, "http://schema.org/UpdateAction"), [
+		
+		 	{name: "replacee",		required: false,	type: "complex",		validator: validators.complex		},
+			{name: "replacer",		required: false,	type: "complex",		validator: validators.complex		}
+])
+});
 
 
 
