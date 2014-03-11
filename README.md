@@ -28,3 +28,7 @@ the drawing board. ;)
 For adding new classes/properties: open schemas-stub.js, copy and edit code, add the code to schemas.js, like it done there.
 
 -- [Go to this page and drop the given link to your bookmarks](http://jsfiddle.net/chilly_bang/mf3xt/embedded/result/) This bookmarklet works with updated and enriched schemas.js and jquery.microdata.js and is based on this one from [@peterhost](https://gist.github.com/1397528). 
+
+#UPDATE 11.03.2014#
+
+-- added extended action classes
