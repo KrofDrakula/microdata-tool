@@ -18,7 +18,17 @@ This tool is a work-in-progress and still doesn't adhere to the full specs (yet)
 Plans to support the full microdata spec + data vocabulary validation are on
 the drawing board. ;)
 
-Thanks to [@peterhost](https://github.com/peterhost) we now have a bookmarklet available 
-(source: https://gist.github.com/1397528) for your use without having to modify your page's source code!
-Simply visit [this page](http://jsfiddle.net/peterhost/ZJfpL/14/embedded/result/) and drag
-the link to your bookmark bar and you're set to go.
+#UPDATE 6.03.2014#
+
+-- schemas.js:  Added 106 new classes with properties accordingly to official Schema Version 1.0f
+
+-- jquery.microdata.js:  Added validations for number and data
+
+-- file schemas-stub.js added. File contains the part of code for adding new classes/properties to schemas.js.
+For adding new classes/properties: open schemas-stub.js, copy and edit code, add the code to schemas.js, like it done there.
+
+-- [Go to this page and drop the given link to your bookmarks](http://jsfiddle.net/chilly_bang/mf3xt/embedded/result/) This bookmarklet works with updated and enriched schemas.js and jquery.microdata.js and is based on this one from [@peterhost](https://gist.github.com/1397528). 
+
+#UPDATE 11.03.2014#
+
+-- added extended action classes
