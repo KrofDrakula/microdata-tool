@@ -22,3 +22,10 @@ Thanks to [@peterhost](https://github.com/peterhost) we now have a bookmarklet a
 (source: https://gist.github.com/1397528) for your use without having to modify your page's source code!
 Simply visit [this page](http://jsfiddle.net/peterhost/ZJfpL/14/embedded/result/) and drag
 the link to your bookmark bar and you're set to go.
+
+# Looking for maintainers for this project!
+
+Due to other obligations taking up my time I haven't been as responsive as I
+would have liked to be, so I've decided to open up this repository to someone
+willing to maintain it. If you think you can pick up the workload, please
+[contact me](https://github.com/KrofDrakula).
