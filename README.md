@@ -1,7 +1,5 @@
 # HTML5 microdata testing tool #
 
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/KrofDrakula/microdata-tool?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
 To see this tool in action, visit [http://krofdrakula.github.com/microdata-tool](http://krofdrakula.github.com/microdata-tool).
 
 This tool was written to aid in debugging and browsing HTML5 microdata.
