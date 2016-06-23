@@ -2,23 +2,7 @@
 (function($) {    
     var items = [], widget,
     
-        // CSS styles injected into head
-        // TODO: need to clean this up or externalize it
-        cssBlock = "#microdata-container { " +
-                   "position: fixed; bottom: 10px; left: 10px; background: white; padding: 5px; color: #444; " +
-                   "-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; border: 1px solid black; " +
-                   "-webkit-box-shadow: 0 0 5px black; -moz-box-shadow: 0 0 5px black; box-shadow: 0 0 5px; " +
-                   "font: normal 11px Droid Sans Mono, Consolas, Inconsolata, monospace; letter-spacing: -1px; " +
-                   "}\n" +
-                   "#microdata-container a { color: #009 !important }\n" +
-                   "#microdata-container li { list-style: none; padding: 0; margin: 0; cursor: pointer; }\n" +
-                   "#microdata-container>li.expanded ul { display: block; }\n" +
-                   "#microdata-container li:hover { background: #ff9 }\n" +
-                   "#microdata-container ul { display: none; padding: 0; margin-left: 10px; color: #999 }\n" +
-                   ".microdata-highlighted { outline: 2px dashed red !important; background: rgba(255,0,0,0.3) !important; color: black !important }\n" +
-                   "#microdata-container .invalid { color: red !important }",
-                   
-        
+    
         // validators for values in microdata
         validators = {
             text:      function(value, el) { return $.trim(value).length > 0; },
@@ -48,9 +32,9 @@
         // would love it if I could externalize this via cached web service
         validationRules = {
             "http://data-vocabulary.org/Event" :
-                [
-                     { name: "summary",     required: true,  type: "text",     validator: validators.text     },
-                     { name: "url",         required: false, type: "url",      validator: validators.url      },
+            [
+            { name: "summary",     required: true,  type: "text",     validator: validators.text     },
+            { name: "url",         required: false, type: "url",      validator: validators.url      },
                      { name: "location",    required: false, type: "complex",  validator: validators.complex  }, // optionally represented by data-vocabulary.org/Organization or data-vocabulary.org/Address
                      { name: "description", required: false, type: "text",     validator: validators.text     },
                      { name: "startdate",   required: true,  type: "datetime", validator: validators.datetime },
@@ -59,10 +43,10 @@
                      { name: "eventtype",   required: false, type: "text",     validator: validators.text     },
                      { name: "geo",         required: false, type: "complex",  validator: validators.complex  }, // represented by itemscope with two properties: latitude and longitude
                      { name: "photo",       required: false, type: "url",      validator: validators.url      } 
-                ],
-                
-            "http://data-vocabulary.org/Person" :
-                [
+                     ],
+                     
+                     "http://data-vocabulary.org/Person" :
+                     [
                      { name: "name",         required: false, type: "text",    validator: validators.text    },
                      { name: "fn",           required: false, type: "text",    validator: validators.text    }, // alias for "name"
                      { name: "nickname",     required: false, type: "text",    validator: validators.text    },
@@ -78,10 +62,10 @@
                      { name: "contact",      required: false, type: "url",     validator: validators.url     },
                      { name: "acquaintance", required: false, type: "url",     validator: validators.url     }
                      // NOTE: to define "friend", "contact" or "acquaintance", you can also use XFN rel="..."
-                ],
-            
-            "http://data-vocabulary.org/Organization" :
-                [
+                     ],
+                     
+                     "http://data-vocabulary.org/Organization" :
+                     [
                      { name: "name",    required: false, type: "text",    validator: validators.text    },
                      { name: "fn",      required: false, type: "text",    validator: validators.text    }, // alias for "name"
                      { name: "org",     required: false, type: "text",    validator: validators.text    }, // alias for "name"
@@ -90,37 +74,37 @@
                      { name: "adr",     required: false, type: "complex", validator: validators.complex }, // alias for "address"
                      { name: "tel",     required: false, type: "text",    validator: validators.text    },
                      { name: "geo",     required: false, type: "complex", validator: validators.complex }
-                ],
-                
-            "http://data-vocabulary.org/Offer" :
-                [
+                     ],
+                     
+                     "http://data-vocabulary.org/Offer" :
+                     [
                      { name: "price",           required: false, type: "float",    validator: validators.float    },
                      { name: "currency",        required: false, type: "text",     validator: validators.currency },
                      { name: "pricevaliduntil", required: false, type: "datetime", validator: validators.datetime },
                      { name: "seller",          required: false, type: "complex",  validator: validators.complex  }, // can contain a Person or Organization
                      {
-                         name: "condition",     required: false, type: "complex",
-                         validator: function(value, el) {
-                             return $(el).hasAttr('content') && $.inArray($(el).attr('content').toLowerCase(), ["new", "used", "refurbished"]);
-                         }
-                     }, 
-                     {
-                         name: "availability",  required: false, type: "complex",
-                         validator: function(value, el) { 
-                             return $(el).hasAttr('content') && $.inArray($(el).attr('content').toLowerCase(), ["out_of_stock", "in_stock", "instore_only", "preorder"]);
-                         }
-                     },
+                       name: "condition",     required: false, type: "complex",
+                       validator: function(value, el) {
+                           return $(el).hasAttr('content') && $.inArray($(el).attr('content').toLowerCase(), ["new", "used", "refurbished"]);
+                       }
+                   }, 
+                   {
+                       name: "availability",  required: false, type: "complex",
+                       validator: function(value, el) { 
+                           return $(el).hasAttr('content') && $.inArray($(el).attr('content').toLowerCase(), ["out_of_stock", "in_stock", "instore_only", "preorder"]);
+                       }
+                   },
                      { name: "offerurl",        required: false, type: "url",      validator: validators.url      }, // points to a product web page that includes the offer
                      { name: "identifier",      required: false, type: "text",     validator: validators.text     }, // recognizes ASIN, ISBN, MPN, UPC, SKU; suggests including product prand and at least one of the identifiers
                      { name: "itemoffered",     required: false, type: "complex",  validator: validators.complex  }  // can contain free text, a Product or other item types
-                ]
-        };
-    
-    
+                     ]
+                 };
+                 
+                 
     /**
      * Auxiliary function to replace all whitespace with a single space
      */
-    var normalizeWhitespace = function(value) {
+     var normalizeWhitespace = function(value) {
         return $.trim(value.replace(/\s+/g, ' '));
     };
     
@@ -128,7 +112,7 @@
      * Takes the result of parseElement and attaches the "valid" and "missing" properties,
      * then returns the augmented object
      */
-    var validateData = function(mdata) {
+     var validateData = function(mdata) {
         var i, rules, required, rule;
         
         if(!validationRules.hasOwnProperty(mdata.type)) {
@@ -175,7 +159,7 @@
     /**
      * Utility functions that extracts the relevant data
      */
-    var parseElement = function(el) {
+     var parseElement = function(el) {
         if(!el.jquery) { el = $(el); }
         // if the element in question isn't an itemscope, return null
         if(!el.hasAttr('itemscope')) { return null; }
@@ -212,14 +196,14 @@
     /**
      * Updates the list of microdata elements on the page
      */
-    var refreshList = function() {
+     var refreshList = function() {
         items = $('[itemscope]', $.microdata.defaults.scope);
     };
     
     /**
      * Removes all microdata objects from widget
      */
-    var clearObjects = function() {
+     var clearObjects = function() {
         widget.children().remove();
     };
     
@@ -228,16 +212,16 @@
      * Adds a microdata object to the widget and adds a hover
      * handler to highlight the relevant element
      */
-    var addObject = function(element, mdata) {
+     var addObject = function(element, mdata) {
         var type = mdata.type,
-            t = $('<li title="' + type + '">' + (validators.url(type)? '<a href="' + type + '">' + type.replace(/^.*\//, '') + '</a>': "[no vocabulary]") + '</li>').appendTo(widget),
-            u = $('<ul/>').appendTo(t),
-            rules = [],
-            required = [],
-            rule,
-            prop,
-            validationExists = false,
-            i;
+        t = $('<li title="' + type + '">' + (validators.url(type)? '<a href="' + type + '">' + type.replace(/^.*\//, '') + '</a>': "[no vocabulary]") + '</li>').appendTo(widget),
+        u = $('<ul/>').appendTo(t),
+        rules = [],
+        required = [],
+        rule,
+        prop,
+        validationExists = false,
+        i;
         
         mdata = (typeof mdata.valid === 'undefined')? mdata = validateData(mdata): mdata;
         
@@ -264,7 +248,7 @@
         t.hover(
             function() { $(element).addClass('microdata-highlighted'); },
             function() { $(element).removeClass('microdata-highlighted'); }
-        ).click(function() { t.toggleClass('expanded'); return false; });
+            ).click(function() { t.toggleClass('expanded'); return false; });
         
     };
     
@@ -272,7 +256,7 @@
     /**
      * Updates the list of microdata objects in the widget
      */
-    var updateList = function() {
+     var updateList = function() {
         
         clearObjects();
         refreshList();
@@ -288,7 +272,7 @@
     
     // this function fires on DOMready
     var init = function() {
-        $('<style type="text/css">' + cssBlock + '</style>').appendTo('head');
+        // $('<style type="text/css">' + cssBlock + '</style>').appendTo('head');
         widget = $('<ul id="microdata-container"/>').appendTo('body');
         
         updateList();

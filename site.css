@@ -2,66 +2,146 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; }
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-}
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-    display: block;
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+body { line-height: 1; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+table { border-collapse: collapse; border-spacing: 0; }
+
+
+/* 
+FOR REFERENCE
+font-family: 'Bungee', cursive;
+font-family: 'Open Sans', sans-serif;
+
+DARK BLUE: #08181B;
+MEDIUM BLUE: #103037;
+LIGHT BLUE: #236776;
+YELLOW: #d4ce7d;
+RED: #B83D3F;
+*/
+
+html {
+	background: #103037;
 }
 body {
-    line-height: 1;
+	margin: auto;
+	padding: 2em;
+	font: normal 300 87.5%/1.75em 'Open Sans', sans-serif;
+	color: #fff;
 }
-ol, ul {
-    list-style: none;
+h1 {
+	font: normal 3em 'Bungee', cursive;
 }
-blockquote, q {
-    quotes: none;
+h2 {
+	font: normal 1.6em 'Bungee', cursive;
+	margin-bottom: 0.75em;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content: '';
-    content: none;
+p {
+	margin-bottom: 1em;
 }
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
+a {
+	color: #d4ce7d;
 }
-
-
-
-a { color: #6f6; }
-em { font-style: italic; }
-strong { font-weight: bold; }
-a.go { font-size: 120%; font-weight: bold; }
-html { background: url(images/bg-gradient.jpg) 20% 0 no-repeat #000c2d }
-body { font: normal 120%/1.8em Garamond, serif; text-rendering:optimizeLegibility; color: white; }
-article { background: #224588; background: rgba(255,255,255,0.2); width: 540px; margin: 0 auto; padding: 20px; padding-bottom: 4em; }
-
-footer { text-align: center; font-size: 75% }
-header { text-align: center; padding: 1em; background: #4467aa; background: rgba(255,255,255,0.2); margin: 1em 0; }
-h1 { font: normal 300% "ChunkFive Roman", ChunkFive, "Arial Black", sans-serif; text-shadow: 0 0 5px black; letter-spacing: 1px }
-header p { font-style: italic; margin: 0 }
-
-p { margin-bottom: 1em; }
-
-.instructions { padding: 40px; padding-left: 140px; background: url(images/arrow.png) 10px 50% no-repeat rgba(255,255,255,0.2); font-size: 85%; line-height: 1.4em; border: 1px solid gray; -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.6); -moz-box-shadow: 0 0 10px rgba(0,0,0,0.6); box-shadow: 0 0 10px rgba(0,0,0,0.6); }
+em, i {
+	font-style: italic;
+}
+strong, b {
+	font-weight: bold;
+}
+article {
+	background: #08181B;
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 2em;
+	padding-bottom: 4em;
+	text-align: center;
+}
+header {
+	text-align: center;
+	padding: 1em;
+	background: #236776;
+	margin-bottom: 2em;
+}
+header p {
+	font-style: italic;
+	margin: 0;
+}
+footer {
+	margin-top: 2em;
+}
+.button {
+	display: inline-block;
+	padding: 0.5em 1em;
+	border-radius: 4px;
+	text-align: center;
+	background-color: #d4ce7d;
+	color: #08181B;
+	text-decoration: none;
+	font-weight: 400;
+	font-size: 1.2em;
+}
+.instructions {
+	padding: 2em;
+	margin: 2em 0;
+	background: #236776;
+}
+.get-it {
+	margin: 3em 0;
+}
+#microdata-container {
+	position: fixed;
+	bottom: 2em;
+	left: 2em;
+	background: white;
+	padding: 1em;
+	font: normal 1em Droid Sans Mono, Consolas, Inconsolata, monospace;
+}
+#microdata-container > li {
+	display: inline-block;
+	list-style: none;
+	padding: 0;
+	cursor: pointer;
+	color: #08181B;
+}
+#microdata-container > li:after {
+	display: inline-block;
+	content: '|';
+	margin: 0 1em;
+}
+#microdata-container > li:last-of-type:after, #microdata-container > li.expanded:after {
+	display: none;
+}
+#microdata-container > li.expanded ul {
+	display: block;
+}
+#microdata-container > li > ul {
+	display: none;
+	padding: 0;
+	margin: 0;
+	color: #999;
+}
+#microdata-container > li > ul li {
+	display: block;
+	padding: 0;
+	margin: 0;
+	color: #999;
+}
+#microdata-container a {
+	color: #08181B;
+}
+#microdata-container .invalid {
+	color: red !important;
+}
+.microdata {
+	margin: 0;
+	padding: 0.5em;
+}
+.microdata-highlighted {
+	background-color: #b83d3f;
+	color: #fff;
+}
